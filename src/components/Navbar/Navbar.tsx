@@ -1,25 +1,36 @@
-"use client"; // This directive makes it a Client Component
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import styles from "./Navbar.module.scss";
 
+// -------------------------------------------------------------------------
+// INTERFACES
+// -------------------------------------------------------------------------
 interface NavItem {
 	label: string;
 	href: string;
 }
 
 const Navbar: React.FC = () => {
-	const pathname = usePathname();
-
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-	const navItems: NavItem[] = [
+	// -------------------------------------------------------------------------
+	// CONSTANTS
+	// -------------------------------------------------------------------------
+	const NAV_ITEMS: NavItem[] = [
 		{ label: "Home", href: "/" },
 		{ label: "Projects", href: "/projects" },
 	];
 
+	// -------------------------------------------------------------------------
+	// HOOKS
+	// -------------------------------------------------------------------------
+	const pathname = usePathname();
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+	// -------------------------------------------------------------------------
+	// HELPERS
+	// -------------------------------------------------------------------------
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
 	};
@@ -32,6 +43,9 @@ const Navbar: React.FC = () => {
 		return pathname === href;
 	};
 
+	// -------------------------------------------------------------------------
+	// JSX
+	// -------------------------------------------------------------------------
 	return (
 		<nav className={styles.navbar}>
 			<div className={styles.container}>
@@ -42,9 +56,9 @@ const Navbar: React.FC = () => {
 
 				{/* Desktop Navigation */}
 				<ul className={styles.navLinks}>
-					{navItems.map((item) => (
+					{NAV_ITEMS.map((item: NavItem) => (
 						<li key={item.href}>
-							<Link href={item.href} className={`${styles.navLink} ${isActiveRoute(item.href) ? styles.active : ""}`}>
+							<Link href={item.href} className={`${styles.navLink} ${isActiveRoute(pathname, item.href) ? styles.active : ""}`}>
 								{item.label}
 							</Link>
 						</li>
@@ -61,7 +75,7 @@ const Navbar: React.FC = () => {
 				{/* Mobile Navigation */}
 				<div className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ""}`}>
 					<ul className={styles.mobileNavLinks}>
-						{navItems.map((item) => (
+						{NAV_ITEMS.map((item: NavItem) => (
 							<li key={item.href}>
 								<Link
 									href={item.href}
