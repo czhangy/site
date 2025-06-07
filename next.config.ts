@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
 	sassOptions: {
 		includePaths: [path.join(__dirname, "styles")],
 		prependData: `@import "@/styles/mixins"; @import "@/styles/variables";`,
+		silenceDeprecations: ["import", "legacy-js-api"],
 	},
 };
 

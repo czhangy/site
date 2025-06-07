@@ -4,6 +4,9 @@
 body {
 	background-color: $bg-color;
 	color: $primary-color;
+	font-family: $font;
+	margin: 0;
+	min-height: calc(100vh - $navbar-height);
 	padding-top: $navbar-height;
 }
 
