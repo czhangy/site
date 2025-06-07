@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap");
+@import "https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap";
 
 // Add top padding to body to account for fixed navbar
 body {
-	padding-top: $navbar-height;
-	color: $primary-color;
 	background-color: $bg-color;
+	color: $primary-color;
+	padding-top: $navbar-height;
 }
 
 // Remove default styling

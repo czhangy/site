@@ -1,8 +1,8 @@
 @mixin flex-center {
-	display: flex;
 	align-items: center;
+	display: flex;
 }
 
 @mixin overlay {
-	background: rgba(0, 0, 0, 0.3);
+	background: rgb(0 0 0 / 30%);
 }
