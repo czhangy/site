@@ -1,0 +1,194 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+.navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	border-bottom: 1px solid transparent;
+	background: $bg-color;
+
+	.container {
+		max-width: $max-width;
+		margin: 0 auto;
+		justify-content: space-between;
+		height: $navbar-height;
+		padding: 0 1rem;
+		@include flex-center;
+
+		.logo {
+			font-weight: 600;
+			font-size: 1.25rem;
+			color: $primary-color;
+			@include flex-center;
+			transition: color 0.3s ease-in-out;
+
+			.logoText {
+				font-family: $font;
+				letter-spacing: -0.025em;
+			}
+		}
+
+		.navLinks {
+			gap: 2rem;
+			margin: 0;
+			padding: 0;
+			display: none;
+
+			.navLink {
+				position: relative;
+				text-decoration: none;
+				font-weight: 500;
+				font-size: 0.9rem;
+				padding: 0.5rem 0;
+				font-family: $font;
+				color: $primary-color;
+				transition: color 0.3s ease-in-out;
+
+				&.active {
+					color: $primary-color;
+
+					&::after {
+						content: "";
+						position: absolute;
+						bottom: -0.25rem;
+						left: 0;
+						right: 0;
+						height: 2px;
+						background: $primary-color;
+						border-radius: 1px;
+					}
+				}
+			}
+		}
+
+		.mobileMenuBtn {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			width: 2.5rem;
+			height: 2.5rem;
+			transition: background-color 0.3s ease-in-out;
+
+			.hamburger {
+				width: 1.25rem;
+				height: 2px;
+				background: $secondary-color;
+				margin: 2px 0;
+				transform-origin: center;
+				transition: transform 0.3s ease-in-out;
+
+				&.open {
+					&:nth-child(1) {
+						transform: rotate(45deg) translate(4px, 4px);
+					}
+
+					&:nth-child(2) {
+						opacity: 0;
+						transform: scale(0);
+					}
+
+					&:nth-child(3) {
+						transform: rotate(-45deg) translate(4px, -4px);
+					}
+				}
+			}
+		}
+
+		.mobileMenu {
+			position: fixed;
+			top: $navbar-height;
+			left: 0;
+			right: 0;
+			background-color: $bg-color;
+			transform: translateY(-10%);
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+			transition: opacity, transform 0.3s ease;
+
+			&.open {
+				transform: translateY(0);
+				opacity: 1;
+				visibility: visible;
+				pointer-events: all;
+				background-color: #232325;
+			}
+
+			.mobileNavLinks {
+				padding: 1rem 0;
+
+				.mobileNavLink {
+					display: block;
+					text-decoration: none;
+					color: $primary-color;
+					font-weight: 500;
+					font-size: 1rem;
+					padding: 0.75rem 1.5rem;
+					border-left: 3px solid transparent;
+					font-family: $font;
+					transition: all 0.3s ease-in-out;
+
+					&.active {
+						color: $primary-color;
+						background: rgba(37, 99, 235, 0.05);
+						border-left-color: $primary-color;
+					}
+				}
+			}
+		}
+
+		.overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: -1;
+			transition: opacity 0.3s ease-in-out;
+			@include overlay;
+		}
+	}
+}
+
+// Desktop layout
+@media (min-width: $tablet) {
+	.navbar > .container {
+		padding: 0 1.5rem;
+
+		.navLinks {
+			@include flex-center;
+		}
+
+		.mobileMenuBtn,
+		.mobileMenu,
+		.overlay {
+			display: none;
+		}
+	}
+}
+
+// Hover effects
+@media (hover: hover) and (pointer: fine) {
+	.navbar > .container {
+		.logo:hover {
+			color: $secondary-color;
+		}
+
+		.navLinks .navLink:hover {
+			color: $secondary-color;
+		}
+
+		.mobileMenuBtn:hover {
+			background-color: rgba(0, 0, 0, 0.05);
+			border-radius: 0.375rem;
+		}
+
+		.mobileMenu > .mobileNavLinks .mobileNavLink:hover {
+			color: $secondary-color;
+			background: rgba(0, 0, 0, 0.02);
+		}
+	}
+}
