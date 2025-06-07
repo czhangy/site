@@ -1,0 +1,3 @@
+next lint
+
+npx lint-staged
