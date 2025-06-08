@@ -1,25 +1,27 @@
-import Footer from "@/components/Footer/Footer";
-import Navbar from "@/components/Navbar/Navbar";
-import "@/styles/globals.scss";
-import type { Metadata } from "next";
+import Footer from '@/components/Footer/Footer';
+import Navbar from '@/components/Navbar/Navbar';
+import '@/styles/globals.scss';
+import { Analytics } from '@vercel/analytics/next';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	title: "czhangy.io",
-	description: "Charles Zhang's personal site",
+    title: 'czhangy.io',
+    description: "Charles Zhang's personal site",
 };
 
 export default function RootLayout({
-	children,
+    children,
 }: Readonly<{
-	children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-	return (
-		<html lang="en">
-			<body>
-				<Navbar />
-				<div className="page">{children}</div>
-				<Footer />
-			</body>
-		</html>
-	);
+    return (
+        <html lang="en">
+            <body>
+                <Navbar />
+                <div className="page">{children}</div>
+                <Footer />
+                <Analytics />
+            </body>
+        </html>
+    );
 }
