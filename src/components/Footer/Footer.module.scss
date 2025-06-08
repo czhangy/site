@@ -1,5 +1,7 @@
 .footer {
-    background-color: rgb(37 37 37);
+    background-color: $dark-bg-color;
+    position: relative;
+    z-index: 100;
 
     .container {
         @include container;

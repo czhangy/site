@@ -1,9 +1,14 @@
 // Color scheme
 $bg-color: rgb(50 50 53);
+$dark-bg-color: rgb(37 37 37);
 $primary-color: #956ac0;
 $secondary-color: #634588;
-$shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
-$shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
+$shadow:
+    0 4px 6px -1px rgb(0 0 0 / 10%),
+    0 2px 4px -1px rgb(0 0 0 / 6%);
+$shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 10%),
+    0 4px 6px -2px rgb(0 0 0 / 5%);
 
 // Structure
 $navbar-height: 4rem;
@@ -12,4 +17,4 @@ $mobile: 480px; // Small phones
 $tablet: 768px; // Tablets and large phones
 $desktop: 1024px; // Desktops and laptops
 $large-desktop: 1440px; // Large screens
-$font: "Raleway", sans-serif;
+$font: 'Raleway', sans-serif;

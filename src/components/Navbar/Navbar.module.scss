@@ -1,85 +1,85 @@
 .navbar {
-	background: $bg-color;
-	left: 0;
-	position: fixed;
-	right: 0;
-	top: 0;
-	z-index: 100;
+    background-color: $dark-bg-color;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
 
-	.container {
-		@include container;
-		@include flex-center;
+    .container {
+        @include container;
+        @include flex-center;
 
-		height: $navbar-height;
-		justify-content: space-between;
+        height: $navbar-height;
+        justify-content: space-between;
 
-		.logo {
-			@include color-transition;
-			@include flex-center;
+        .logo {
+            @include color-transition;
+            @include flex-center;
 
-			color: $primary-color;
-			font-family: $font;
-			font-size: 1.25rem;
-			font-weight: 700;
-			letter-spacing: 0.1rem;
-		}
+            color: $primary-color;
+            font-family: $font;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.1rem;
+        }
 
-		.navLinks {
-			display: none;
-			gap: 2rem;
-			margin: 0;
-			padding: 0;
+        .navLinks {
+            display: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
 
-			.navLink {
-				@include color-transition;
+            .navLink {
+                @include color-transition;
 
-				color: $primary-color;
-				font-family: $font;
-				font-size: 0.9rem;
-				font-weight: 500;
-				padding: 0.5rem 0;
-				position: relative;
-				text-decoration: none;
+                color: $primary-color;
+                font-family: $font;
+                font-size: 0.9rem;
+                font-weight: 500;
+                padding: 0.5rem 0;
+                position: relative;
+                text-decoration: none;
 
-				&.active {
-					color: $primary-color;
+                &.active {
+                    color: $primary-color;
 
-					&::after {
-						background: $primary-color;
-						border-radius: 1px;
-						bottom: -0.25rem;
-						content: "";
-						height: 2px;
-						left: 0;
-						position: absolute;
-						right: 0;
-					}
-				}
-			}
-		}
-	}
+                    &::after {
+                        background: $primary-color;
+                        border-radius: 1px;
+                        bottom: -0.25rem;
+                        content: '';
+                        height: 2px;
+                        left: 0;
+                        position: absolute;
+                        right: 0;
+                    }
+                }
+            }
+        }
+    }
 }
 
 // Desktop layout
 @media (min-width: $tablet) {
-	.navbar > .container {
-		padding: 0 1.5rem;
+    .navbar > .container {
+        padding: 0 1.5rem;
 
-		.navLinks {
-			@include flex-center;
-		}
-	}
+        .navLinks {
+            @include flex-center;
+        }
+    }
 }
 
 // Hover effects
 @media (hover: hover) and (pointer: fine) {
-	.navbar > .container {
-		.logo:hover {
-			color: $secondary-color;
-		}
+    .navbar > .container {
+        .logo:hover {
+            color: $secondary-color;
+        }
 
-		.navLinks .navLink:hover {
-			color: $secondary-color;
-		}
-	}
+        .navLinks .navLink:hover {
+            color: $secondary-color;
+        }
+    }
 }

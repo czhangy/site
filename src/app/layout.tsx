@@ -1,3 +1,4 @@
+import Cursor from '@/components/Cursor/Cursor';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
 import '@/styles/globals.scss';
@@ -14,11 +15,13 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    // JSX
     return (
         <html lang="en">
             <body>
                 <Navbar />
                 <div className="page">{children}</div>
+                <Cursor />
                 <Footer />
                 <Analytics />
             </body>
