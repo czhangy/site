@@ -7,21 +7,21 @@
 	z-index: 100;
 
 	.container {
-		height: $navbar-height;
-		justify-content: space-between;
-
 		@include container;
 		@include flex-center;
 
+		height: $navbar-height;
+		justify-content: space-between;
+
 		.logo {
+			@include color-transition;
+			@include flex-center;
+
 			color: $primary-color;
 			font-family: $font;
 			font-size: 1.25rem;
 			font-weight: 700;
 			letter-spacing: 0.1rem;
-
-			@include color-transition;
-			@include flex-center;
 		}
 
 		.navLinks {
@@ -31,6 +31,8 @@
 			padding: 0;
 
 			.navLink {
+				@include color-transition;
+
 				color: $primary-color;
 				font-family: $font;
 				font-size: 0.9rem;
@@ -38,8 +40,6 @@
 				padding: 0.5rem 0;
 				position: relative;
 				text-decoration: none;
-
-				@include color-transition;
 
 				&.active {
 					color: $primary-color;

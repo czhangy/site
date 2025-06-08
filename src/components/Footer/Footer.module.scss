@@ -1,42 +1,42 @@
 .footer {
-	background-color: rgb(37 37 37);
+    background-color: rgb(37 37 37);
 
-	.container {
-		@include container;
-		@include flex-center;
+    .container {
+        @include container;
+        @include flex-center;
 
-		height: 6rem;
-		justify-content: space-between;
+        height: 6rem;
+        justify-content: space-between;
 
-		.credits {
-			color: white;
-			font-weight: 500;
-			letter-spacing: 1px;
-		}
+        .credits {
+            color: white;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
 
-		.links {
-			@include flex-center;
+        .links {
+            @include flex-center;
 
-			gap: 2rem;
+            gap: 2rem;
 
-			.icon {
-				color: white;
-				height: 2em;
-				overflow: hidden;
-				vertical-align: middle;
-				width: 2rem;
+            .icon {
+                @include color-transition;
 
-				@include color-transition;
-			}
-		}
-	}
+                color: white;
+                height: 2em;
+                overflow: hidden;
+                vertical-align: middle;
+                width: 2rem;
+            }
+        }
+    }
 }
 
 // Hover effects
 @media (hover: hover) and (pointer: fine) {
-	.footer > .container > .links {
-		.icon:hover {
-			color: $primary-color;
-		}
-	}
+    .footer > .container > .links {
+        .icon:hover {
+            color: $primary-color;
+        }
+    }
 }
