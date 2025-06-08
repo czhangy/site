@@ -1,6 +1,5 @@
 .navbar {
 	background: $bg-color;
-	border-bottom: 1px solid transparent;
 	left: 0;
 	position: fixed;
 	right: 0;
@@ -10,20 +9,18 @@
 	.container {
 		height: $navbar-height;
 		justify-content: space-between;
-		margin: 0 auto;
-		max-width: $max-width;
-		padding: 0 1rem;
 
+		@include container;
 		@include flex-center;
 
 		.logo {
 			color: $primary-color;
 			font-family: $font;
 			font-size: 1.25rem;
-			font-weight: 600;
+			font-weight: 700;
 			letter-spacing: 0.1rem;
-			transition: color 0.3s ease-in-out;
 
+			@include color-transition;
 			@include flex-center;
 		}
 
@@ -41,7 +38,8 @@
 				padding: 0.5rem 0;
 				position: relative;
 				text-decoration: none;
-				transition: color 0.3s ease-in-out;
+
+				@include color-transition;
 
 				&.active {
 					color: $primary-color;

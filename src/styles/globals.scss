@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap";
 
 // Add top padding to body to account for fixed navbar
 body {
@@ -6,8 +6,12 @@ body {
 	color: $primary-color;
 	font-family: $font;
 	margin: 0;
-	min-height: calc(100vh - $navbar-height);
 	padding-top: $navbar-height;
+}
+
+// Give the page a minimum height to space the footer
+.page {
+	min-height: calc(100vh - $navbar-height);
 }
 
 // Remove default styling
@@ -21,6 +25,7 @@ ul {
 	margin: 0;
 }
 
+// Remove default styling
 button {
 	background: none;
 	border: none;

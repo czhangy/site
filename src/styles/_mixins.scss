@@ -6,3 +6,13 @@
 @mixin overlay {
 	background: rgb(0 0 0 / 30%);
 }
+
+@mixin container {
+	margin: 0 auto;
+	max-width: $max-width;
+	padding: 0 3rem;
+}
+
+@mixin color-transition {
+	transition: color 0.2s ease-in-out;
+}

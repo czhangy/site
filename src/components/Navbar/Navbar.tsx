@@ -2,7 +2,7 @@
 
 import MobileMenu from "@/components/MobileMenu/MobileMenu";
 import { isActiveRoute } from "@/utils/helpers";
-import { NavItem } from "@/utils/interfaces";
+import { LinkItem } from "@/utils/interfaces";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
@@ -10,9 +10,9 @@ import styles from "./Navbar.module.scss";
 
 const Navbar: React.FC = () => {
 	// Constants
-	const NAV_ITEMS: NavItem[] = [
-		{ label: "Home", href: "/" },
-		{ label: "Projects", href: "/projects" },
+	const LINK_ITEMS: LinkItem[] = [
+		{ display: "Home", href: "/" },
+		{ display: "Projects", href: "/projects" },
 	];
 
 	// Hooks
@@ -34,17 +34,17 @@ const Navbar: React.FC = () => {
 
 				{/* Desktop Navigation */}
 				<ul className={styles.navLinks}>
-					{NAV_ITEMS.map((item: NavItem) => (
+					{LINK_ITEMS.map((item: LinkItem) => (
 						<li key={item.href}>
 							<Link href={item.href} className={`${styles.navLink} ${isActiveRoute(pathname, item.href) ? styles.active : ""}`}>
-								{item.label}
+								{item.display}
 							</Link>
 						</li>
 					))}
 				</ul>
 
 				{/* Mobile Navigation */}
-				<MobileMenu open={isMenuOpen} items={NAV_ITEMS} onToggle={toggleMenu} onClose={closeMenu} />
+				<MobileMenu open={isMenuOpen} items={LINK_ITEMS} onToggle={toggleMenu} onClose={closeMenu} />
 			</div>
 		</nav>
 	);

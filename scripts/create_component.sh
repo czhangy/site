@@ -37,8 +37,8 @@ interface ${COMPONENT_NAME}Props {
   // Add your props here
 }
 
-// JSX
 const $COMPONENT_NAME: React.FC<${COMPONENT_NAME}Props> = () => {
+  // JSX
   return (
     <div className={styles.${KEBAB_NAME}}>
       <h1>$COMPONENT_NAME Component</h1>
