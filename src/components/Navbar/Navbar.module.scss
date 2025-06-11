@@ -16,41 +16,7 @@
         .logo {
             @include color-transition;
             @include flex-center;
-            @include title
-        }
-
-        .navLinks {
-            display: none;
-            gap: 2rem;
-            margin: 0;
-            padding: 0;
-
-            .navLink {
-                @include color-transition;
-
-                color: $primary-color;
-                font-family: $font;
-                font-size: 0.9rem;
-                font-weight: 500;
-                padding: 0.5rem 0;
-                position: relative;
-                text-decoration: none;
-
-                &.active {
-                    color: $primary-color;
-
-                    &::after {
-                        background: $primary-color;
-                        border-radius: 1px;
-                        bottom: -0.25rem;
-                        content: '';
-                        height: 2px;
-                        left: 0;
-                        position: absolute;
-                        right: 0;
-                    }
-                }
-            }
+            @include title;
         }
     }
 }
@@ -59,22 +25,12 @@
 @media (min-width: $tablet) {
     .navbar > .container {
         padding: 0 1.5rem;
-
-        .navLinks {
-            @include flex-center;
-        }
     }
 }
 
 // Hover effects
 @media (hover: hover) and (pointer: fine) {
-    .navbar > .container {
-        .logo:hover {
-            color: $secondary-color;
-        }
-
-        .navLinks .navLink:hover {
-            color: $secondary-color;
-        }
+    .navbar > .container .logo:hover {
+        color: $secondary-color;
     }
 }

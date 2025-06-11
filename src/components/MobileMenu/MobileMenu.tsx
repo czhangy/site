@@ -1,4 +1,4 @@
-import { isActiveRoute } from '@/utils/helpers';
+import { LINK_ITEMS } from '@/utils/constants';
 import { LinkItem } from '@/utils/interfaces';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -7,7 +7,6 @@ import styles from './MobileMenu.module.scss';
 
 interface MobileMenuProps {
     open: boolean;
-    items: LinkItem[];
     onToggle: () => void;
     onClose: () => void;
 }
@@ -15,6 +14,11 @@ interface MobileMenuProps {
 const MobileMenu: React.FC<MobileMenuProps> = props => {
     // Hooks
     const pathname = usePathname();
+
+    // Helpers
+    const isActiveRoute = (pathname: string, href: string): boolean => {
+        return pathname === href;
+    };
 
     // JSX
     return (
@@ -33,7 +37,7 @@ const MobileMenu: React.FC<MobileMenuProps> = props => {
             {/* Navigation */}
             <div className={`${styles.mobileMenu} ${props.open ? styles.open : ''}`}>
                 <ul className={styles.mobileNavLinks}>
-                    {props.items.map((item: LinkItem) => (
+                    {LINK_ITEMS.map((item: LinkItem) => (
                         <li key={item.href}>
                             <Link
                                 href={item.href}
