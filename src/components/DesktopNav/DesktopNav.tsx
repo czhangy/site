@@ -10,9 +10,12 @@ const DesktopNav: React.FC = () => {
     const pathname = usePathname();
 
     // Helpers
+    const getHrefs = (): string[] => {
+        return LINK_ITEMS.map((item: LinkItem) => item.href);
+    };
     const computeInlineStyle = (): CSSProperties => {
-        const hrefs: string[] = LINK_ITEMS.map((item: LinkItem) => item.href);
-        const idx: number = hrefs.indexOf(pathname);
+        // Idx will always be != -1 because this helper only runs on valid paths
+        const idx: number = getHrefs().indexOf(pathname);
         const width: number = LINK_ITEMS[idx].width;
 
         // This math works as follows:
@@ -28,6 +31,7 @@ const DesktopNav: React.FC = () => {
     // JSX
     return (
         <ul className={styles.desktopNav}>
+            {/* Nav Items */}
             {LINK_ITEMS.map((item: LinkItem) => (
                 <li key={item.href}>
                     <Link className={styles.navLink} href={item.href}>
@@ -35,7 +39,11 @@ const DesktopNav: React.FC = () => {
                     </Link>
                 </li>
             ))}
-            <span className={styles.highlight} style={computeInlineStyle()} />
+
+            {/* Highlight Bar */}
+            {getHrefs().includes(pathname) ? (
+                <span className={styles.highlight} style={computeInlineStyle()} />
+            ) : null}
         </ul>
     );
 };
