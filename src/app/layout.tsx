@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: "Charles Zhang's personal site",
 };
 
-const raleway = Raleway({ weight: ['400', '500', '600', '700'] });
+const raleway = Raleway({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
 
 export default function RootLayout({
     children,
