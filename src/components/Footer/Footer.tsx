@@ -1,33 +1,50 @@
-import Link from "next/link";
-import React from "react";
-import styles from "./Footer.module.scss";
+import GlowBorder from '@/components/GlowBorder/GlowBorder';
+import Link from 'next/link';
+import React from 'react';
+import styles from './Footer.module.scss';
 
 const Footer: React.FC = () => {
-	// JSX
-	return (
-		<footer className={styles.footer}>
-			<div className={styles.container}>
-				{/* Byline */}
-				<span className={styles.credits}>built by charles zhang</span>
+    // JSX
+    return (
+        <footer className={styles.footer}>
+            {/* Animated Border */}
+            <GlowBorder top={true} />
 
-				{/* Social Media Links */}
-				<ul className={styles.links}>
-					<li>
-						<Link href="https://linkedin.com/in/czhangy" target="_blank" rel="noopener noreferrer">
-							<svg className={styles.icon} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-								<path
-									fill="currentColor"
-									d="M385.024 706.368V406.72H285.376v299.68h99.616zM335.2 365.76c34.72 0 56.384-23.04 56.384-51.808-0.64-29.376-21.664-51.744-55.68-51.744-34.144 0-56.384 22.4-56.384 51.744 0 28.8 21.632 51.84 55.072 51.84z m409.024 340.608v-171.808c0-92.064-49.152-134.912-114.656-134.912-52.928 0-76.608 29.12-89.792 49.504v-42.496h-99.616c1.312 28.16 0 299.712 0 299.712h99.616v-167.36c0-8.96 0.64-17.92 3.264-24.256 7.168-17.92 23.584-36.448 51.072-36.448 36.064 0 50.56 27.456 50.56 67.744v160.352h99.584zM512 64c247.424 0 448 200.544 448 448 0 247.424-200.576 448-448 448-247.456 0-448-200.576-448-448C64 264.544 264.544 64 512 64z"
-								/>
-							</svg>
-						</Link>
-					</li>
-					<li>
-						<Link href="https://x.com/czhangy_" target="_blank" rel="noopener noreferrer">
-							<svg className={styles.icon} viewBox="0 0 310 310">
-								<path
-									fill="currentColor"
-									d="M302.973,57.388c-4.87,2.16-9.877,3.983-14.993,5.463c6.057-6.85,10.675-14.91,13.494-23.73
+            <div className={styles.container}>
+                {/* Byline */}
+                <span className={styles.credits}>built by charles zhang</span>
+
+                {/* Social Media Links */}
+                <ul className={styles.links}>
+                    <li>
+                        <Link
+                            href="https://linkedin.com/in/czhangy"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <svg
+                                className={styles.icon}
+                                viewBox="0 0 1024 1024"
+                                version="1.1"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill="currentColor"
+                                    d="M385.024 706.368V406.72H285.376v299.68h99.616zM335.2 365.76c34.72 0 56.384-23.04 56.384-51.808-0.64-29.376-21.664-51.744-55.68-51.744-34.144 0-56.384 22.4-56.384 51.744 0 28.8 21.632 51.84 55.072 51.84z m409.024 340.608v-171.808c0-92.064-49.152-134.912-114.656-134.912-52.928 0-76.608 29.12-89.792 49.504v-42.496h-99.616c1.312 28.16 0 299.712 0 299.712h99.616v-167.36c0-8.96 0.64-17.92 3.264-24.256 7.168-17.92 23.584-36.448 51.072-36.448 36.064 0 50.56 27.456 50.56 67.744v160.352h99.584zM512 64c247.424 0 448 200.544 448 448 0 247.424-200.576 448-448 448-247.456 0-448-200.576-448-448C64 264.544 264.544 64 512 64z"
+                                />
+                            </svg>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href="https://x.com/czhangy_"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <svg className={styles.icon} viewBox="0 0 310 310">
+                                <path
+                                    fill="currentColor"
+                                    d="M302.973,57.388c-4.87,2.16-9.877,3.983-14.993,5.463c6.057-6.85,10.675-14.91,13.494-23.73
                 c0.632-1.977-0.023-4.141-1.648-5.434c-1.623-1.294-3.878-1.449-5.665-0.39c-10.865,6.444-22.587,11.075-34.878,13.783
                 c-12.381-12.098-29.197-18.983-46.581-18.983c-36.695,0-66.549,29.853-66.549,66.547c0,2.89,0.183,5.764,0.545,8.598
                 C101.163,99.244,58.83,76.863,29.76,41.204c-1.036-1.271-2.632-1.956-4.266-1.825c-1.635,0.128-3.104,1.05-3.93,2.467
@@ -39,14 +56,14 @@ const Footer: React.FC = () => {
                 c29.023,18.609,62.582,28.445,97.047,28.445c67.754,0,110.139-31.95,133.764-58.753c29.46-33.421,46.356-77.658,46.356-121.367
                 c0-1.826-0.028-3.67-0.084-5.508c11.623-8.757,21.63-19.355,29.773-31.536c1.237-1.85,1.103-4.295-0.33-5.998
                 C307.394,57.037,305.009,56.486,302.973,57.388z"
-								/>
-							</svg>
-						</Link>
-					</li>
-				</ul>
-			</div>
-		</footer>
-	);
+                                />
+                            </svg>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    );
 };
 
 export default Footer;

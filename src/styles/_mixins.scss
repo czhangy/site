@@ -1,18 +1,24 @@
 @mixin flex-center {
-	align-items: center;
-	display: flex;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 @mixin overlay {
-	background: rgb(0 0 0 / 30%);
+    background: rgb(0 0 0 / 30%);
 }
 
 @mixin container {
-	margin: 0 auto;
-	max-width: $max-width;
-	padding: 0 3rem;
+    margin: 0 auto;
+    max-width: $max-width;
+    padding: 0 3rem;
 }
 
 @mixin color-transition {
-	transition: color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
+}
+
+@mixin fill-space {
+    height: 100%;
+    width: 100%;
 }

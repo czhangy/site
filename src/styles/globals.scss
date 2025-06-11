@@ -1,34 +1,38 @@
-@import "https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap";
+@import 'https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap';
 
 // Add top padding to body to account for fixed navbar
 body {
-	background-color: $bg-color;
-	color: $primary-color;
-	font-family: $font;
-	margin: 0;
-	padding-top: $navbar-height;
-}
+    background-color: $bg-color;
+    color: $primary-color;
+    font-family: $font;
+    margin: 0;
+    padding-top: $navbar-height;
+    width: 100%;
 
-// Give the page a minimum height to space the footer
-.page {
-	min-height: calc(100vh - $navbar-height);
+    .container {
+        @include container;
+        @include flex-center;
+
+        min-height: calc(100vh - $navbar-height);
+        width: 100%;
+    }
 }
 
 // Remove default styling
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 // Remove default styling
 ul {
-	list-style: none;
-	margin: 0;
+    list-style: none;
+    margin: 0;
 }
 
 // Remove default styling
 button {
-	background: none;
-	border: none;
-	cursor: pointer;
-	padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }

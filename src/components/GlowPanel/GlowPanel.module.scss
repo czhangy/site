@@ -1,0 +1,44 @@
+.glowPanel {
+    @include fill-space;
+
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    .glowPanelContainer {
+        @include fill-space;
+
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+
+        .glowOverlay {
+            border-radius: 8px;
+            inset: 0;
+            mask-composite: subtract;
+            mask-composite: subtract;
+
+            // CSS mask to create border-only effect
+            mask-image: linear-gradient(white, white), linear-gradient(white, white);
+            mask-image: linear-gradient(white, white), linear-gradient(white, white);
+            mask-position:
+                0 0,
+                2px 2px;
+            mask-repeat: no-repeat, no-repeat;
+            mask-size:
+                100% 100%,
+                calc(100% - 4px) calc(100% - 4px);
+            pointer-events: none;
+            position: absolute;
+
+            &.active {
+                background: radial-gradient(
+                    150px circle at var(--mouse-x) var(--mouse-y),
+                    rgba($primary-color, 0.8) 0%,
+                    rgba($primary-color, 0.4) 30%,
+                    transparent 70%
+                );
+            }
+        }
+    }
+}

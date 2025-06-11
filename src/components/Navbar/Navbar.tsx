@@ -1,5 +1,6 @@
 'use client';
 
+import GlowBorder from '@/components/GlowBorder/GlowBorder';
 import MobileMenu from '@/components/MobileMenu/MobileMenu';
 import { isActiveRoute } from '@/utils/helpers';
 import { LinkItem } from '@/utils/interfaces';
@@ -54,6 +55,9 @@ const Navbar: React.FC = () => {
                     onClose={closeMenu}
                 />
             </div>
+
+            {/* Animated Border */}
+            <GlowBorder top={false} />
         </nav>
     );
 };

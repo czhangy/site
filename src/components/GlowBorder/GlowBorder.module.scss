@@ -1,0 +1,60 @@
+.glowBorder {
+    --animation-time: 3s;
+
+    bottom: 0;
+    height: 2px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+
+    &::before {
+        animation: smooth-glow-move var(--animation-time) linear infinite;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba($secondary-color, 0.3) 25%,
+            rgba($primary-color, 1) 50%,
+            rgba($secondary-color, 0.3) 75%,
+            transparent 100%
+        );
+        content: '';
+        filter: blur(1px);
+        height: 100%;
+        left: -30%;
+        position: absolute;
+        top: 0;
+        width: 60%;
+    }
+
+    &::after {
+        animation: smooth-glow-move var(--animation-time) linear infinite;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba($secondary-color, 0.4) 30%,
+            rgba($primary-color, 0.8) 50%,
+            rgba($secondary-color, 0.4) 70%,
+            transparent 100%
+        );
+        content: '';
+        filter: blur(3px);
+        height: calc(100% + 4px);
+        left: -30%;
+        position: absolute;
+        top: -2px;
+        width: 60%;
+        z-index: -1;
+    }
+}
+
+// Animations
+@keyframes smooth-glow-move {
+    0% {
+        transform: translateX(-66.7%);
+    }
+
+    100% {
+        transform: translateX(566.67%);
+    }
+}
