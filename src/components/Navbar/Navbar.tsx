@@ -2,6 +2,7 @@
 
 import GlowBorder from '@/components/GlowBorder/GlowBorder';
 import MobileMenu from '@/components/MobileMenu/MobileMenu';
+import { LINK_ITEMS } from '@/utils/constants';
 import { isActiveRoute } from '@/utils/helpers';
 import { LinkItem } from '@/utils/interfaces';
 import Link from 'next/link';
@@ -10,12 +11,6 @@ import React, { useState } from 'react';
 import styles from './Navbar.module.scss';
 
 const Navbar: React.FC = () => {
-    // Constants
-    const LINK_ITEMS: LinkItem[] = [
-        { display: 'Home', href: '/' },
-        { display: 'Projects', href: '/projects' },
-    ];
-
     // Hooks
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);

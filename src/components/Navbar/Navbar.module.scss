@@ -16,12 +16,7 @@
         .logo {
             @include color-transition;
             @include flex-center;
-
-            color: $primary-color;
-            font-family: $font;
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: 0.1rem;
+            @include title
         }
 
         .navLinks {

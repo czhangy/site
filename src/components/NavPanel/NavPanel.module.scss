@@ -1,0 +1,40 @@
+.navPanel {
+    height: 100%;
+
+    .background {
+        background: linear-gradient(135deg, #956ac0 0%, #7c3aed 50%, #a855f7 100%);
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transform: translateY(-100%);
+        transition: transform 0.4s ease-out;
+        width: 100%;
+    }
+
+    .link {
+        @include flex-center;
+        @include title;
+
+        height: 100%;
+        position: relative;
+        transition: all 0.2s ease;
+        width: 100%;
+    }
+}
+
+// Hover effects
+@media (hover: hover) and (pointer: fine) {
+    .navPanel {
+        .link:hover {
+            color: $dark-bg-color;
+            letter-spacing: 0.2rem;
+        }
+    }
+
+    .navPanel:hover {
+        .background {
+            transform: translateY(0%);
+        }
+    }
+}
