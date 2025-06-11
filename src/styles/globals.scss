@@ -1,16 +1,16 @@
 // Add top padding to body to account for fixed navbar
 
-html {
+body {
     background-color: $dark-bg-color;
+    color: $primary-color;
+    font-family: $font;
+    margin: 0;
+    overflow-x: hidden;
+    padding-top: $navbar-height;
+    width: 100%;
 
-    body {
+    .background {
         background-color: $bg-color;
-        color: $primary-color;
-        font-family: $font;
-        margin: 0;
-        overflow-x: hidden;
-        padding-top: $navbar-height;
-        width: 100%;
 
         .container {
             @include container;
