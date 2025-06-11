@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Animated Border */}
-            <GlowBorder top={false} />
+            <GlowBorder reverse={false} />
         </nav>
     );
 };

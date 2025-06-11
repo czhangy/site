@@ -1,6 +1,4 @@
 .glowBorder {
-    --animation-time: 3s;
-
     bottom: 0;
     height: 2px;
     left: 0;
@@ -9,7 +7,7 @@
     width: 100%;
 
     &::before {
-        animation: smooth-glow-move var(--animation-time) linear infinite;
+        animation: smooth-glow-move 3s linear infinite;
         background: linear-gradient(
             90deg,
             transparent 0%,
@@ -28,7 +26,7 @@
     }
 
     &::after {
-        animation: smooth-glow-move var(--animation-time) linear infinite;
+        animation: smooth-glow-move 3s linear infinite;
         background: linear-gradient(
             90deg,
             transparent 0%,
@@ -48,6 +46,16 @@
     }
 }
 
+.reverse {
+    &::before {
+        animation: smooth-glow-move-reverse 3s linear infinite;
+    }
+
+    &::after {
+        animation: smooth-glow-move-reverse 3s linear infinite;
+    }
+}
+
 // Animations
 @keyframes smooth-glow-move {
     0% {
@@ -56,5 +64,15 @@
 
     100% {
         transform: translateX(566.67%);
+    }
+}
+
+@keyframes smooth-glow-move-reverse {
+    0% {
+        transform: translateX(166.67%);
+    }
+
+    100% {
+        transform: translateX(-566.7%);
     }
 }

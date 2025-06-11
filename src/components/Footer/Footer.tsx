@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
     return (
         <footer className={styles.footer}>
             {/* Animated Border */}
-            <GlowBorder top={true} />
+            <GlowBorder reverse={true} />
 
             <div className={styles.container}>
                 {/* Byline */}
