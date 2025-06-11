@@ -16,15 +16,13 @@
             border-radius: 8px;
             inset: 0;
             mask-composite: subtract;
-            mask-composite: subtract;
 
             // CSS mask to create border-only effect
-            mask-image: linear-gradient(white, white), linear-gradient(white, white);
             mask-image: linear-gradient(white, white), linear-gradient(white, white);
             mask-position:
                 0 0,
                 2px 2px;
-            mask-repeat: no-repeat, no-repeat;
+            mask-repeat: no-repeat;
             mask-size:
                 100% 100%,
                 calc(100% - 4px) calc(100% - 4px);
