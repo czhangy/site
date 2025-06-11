@@ -2,10 +2,8 @@ import Dashboard from '@/components/Dashboard/Dashboard';
 
 export default function Home() {
     return (
-        <div className="background">
-            <div className="container">
-                <Dashboard />
-            </div>
+        <div className="container">
+            <Dashboard />
         </div>
     );
 }
