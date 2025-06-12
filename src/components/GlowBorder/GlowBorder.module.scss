@@ -7,7 +7,7 @@
     width: 100%;
 
     &::before {
-        animation: smooth-glow-move 3s linear infinite;
+        animation: smooth-glow-move 2.25s linear infinite;
         background: linear-gradient(
             90deg,
             transparent 0%,
@@ -26,7 +26,7 @@
     }
 
     &::after {
-        animation: smooth-glow-move 3s linear infinite;
+        animation: smooth-glow-move 2.25s linear infinite;
         background: linear-gradient(
             90deg,
             transparent 0%,
@@ -48,31 +48,31 @@
 
 .reverse {
     &::before {
-        animation: smooth-glow-move-reverse 3s linear infinite;
+        animation: smooth-glow-move-reverse 2.25s linear infinite;
     }
 
     &::after {
-        animation: smooth-glow-move-reverse 3s linear infinite;
+        animation: smooth-glow-move-reverse 2.25s linear infinite;
     }
 }
 
 // Animations
 @keyframes smooth-glow-move {
     0% {
-        transform: translateX(-66.7%);
+        transform: translateX(-180%);
     }
 
     100% {
-        transform: translateX(566.67%);
+        transform: translateX(180%);
     }
 }
 
 @keyframes smooth-glow-move-reverse {
     0% {
-        transform: translateX(166.67%);
+        transform: translateX(180%);
     }
 
     100% {
-        transform: translateX(-566.7%);
+        transform: translateX(-180%);
     }
 }
