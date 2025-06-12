@@ -22,11 +22,10 @@
             gap: 2rem;
 
             .icon {
-                @include color-transition;
-
                 color: white;
                 height: 2em;
                 overflow: hidden;
+                transition: all 0.2s ease;
                 vertical-align: middle;
                 width: 2rem;
             }
@@ -39,6 +38,7 @@
     .footer > .container > .links {
         .icon:hover {
             color: $primary-color;
+            transform: scale(1.2) rotate(10deg);
         }
     }
 }

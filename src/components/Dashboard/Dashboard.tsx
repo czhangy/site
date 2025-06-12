@@ -9,19 +9,13 @@ const Dashboard: React.FC = () => {
     return (
         <div className={styles.dashboard}>
             <div className={`${styles.gridPanel} ${styles.panel1}`}>
-                <GlowPanel>
-                    <NavPanel linkItem={LINK_ITEMS[1]} />
-                </GlowPanel>
+                <NavPanel linkItem={LINK_ITEMS[1]} />
             </div>
             <div className={`${styles.gridPanel} ${styles.panel2}`}>
-                <GlowPanel>
-                    <NavPanel linkItem={LINK_ITEMS[2]} />
-                </GlowPanel>
+                <NavPanel linkItem={LINK_ITEMS[2]} />
             </div>
             <div className={`${styles.gridPanel} ${styles.panel3}`}>
-                <GlowPanel>
-                    <NavPanel linkItem={LINK_ITEMS[3]} />
-                </GlowPanel>
+                <NavPanel linkItem={LINK_ITEMS[3]} />
             </div>
             <div className={`${styles.gridPanel} ${styles.panel4}`}>
                 <GlowPanel>Recent Tweet</GlowPanel>

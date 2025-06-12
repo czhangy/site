@@ -1,5 +1,8 @@
 .navPanel {
+    border-radius: 4px;
     height: 100%;
+    overflow: hidden;
+    position: relative;
 
     .background {
         background: linear-gradient(135deg, #956ac0 0%, #7c3aed 50%, #a855f7 100%);
