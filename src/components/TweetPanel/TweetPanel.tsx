@@ -4,11 +4,12 @@ import { supabase } from '@/lib/supabase';
 import { TwitterData } from '@/utils/interfaces';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import LoadingText from '../LoadingText/LoadingText';
 import styles from './TweetPanel.module.scss';
 
 const TweetPanel: React.FC = () => {
     // Hooks
-    const [isError, setIsError] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [twitterData, setTwitterData] = useState<TwitterData | null>(null);
     useEffect(() => {
         fetchTwitterData();
@@ -16,12 +17,13 @@ const TweetPanel: React.FC = () => {
 
     // Helpers
     const fetchTwitterData = async () => {
+        setIsLoading(true);
+
         // Read access is public on the Tweet table
         const { data, error } = await supabase.from('tweet').select('*');
 
         if (error) {
             console.error('Error fetching tweet data', error);
-            setIsError(true);
         } else {
             const tweetData = data[0];
             const fetchedTwitterData: TwitterData = {
@@ -32,6 +34,9 @@ const TweetPanel: React.FC = () => {
             };
             setTwitterData(fetchedTwitterData);
         }
+
+        // Use a timeout to let twitterData get set before revealing
+        setTimeout(() => setIsLoading(false), 500);
     };
 
     const parseEscapedEmojis = (text: string) => {
@@ -82,32 +87,86 @@ const TweetPanel: React.FC = () => {
         }
     };
 
+    const renderProfilePic = () => {
+        return (
+            <div className={styles.pic}>
+                <Image
+                    src={twitterData ? twitterData!.profilePicUrl : '/placeholder.webp'}
+                    alt="Twitter profile picture"
+                    objectFit="contain"
+                    layout="fill"
+                />
+            </div>
+        );
+    };
+
+    const renderDisplayName = () => {
+        if (isLoading) {
+            return <LoadingText width="100px" />;
+        } else {
+            return (
+                <span className={styles.displayName}>
+                    {twitterData ? twitterData.displayName : 'Charles Zhang'}
+                </span>
+            );
+        }
+    };
+
+    const renderUsername = () => {
+        if (isLoading) {
+            return <LoadingText width="90px" />;
+        } else {
+            return <span className={styles.username}>@czhangy_</span>;
+        }
+    };
+
+    const renderTweet = () => {
+        if (isLoading) {
+            return (
+                <div className={`${styles.tweet} ${styles.loadingTweet}`}>
+                    <LoadingText width="100%" />
+                    <LoadingText width="100%" />
+                    <LoadingText width="100%" />
+                </div>
+            );
+        } else {
+            return (
+                <p className={styles.tweet}>
+                    {twitterData
+                        ? twitterData.tweet
+                        : 'something went wrong while fetching my latest tweet. fuck you twitter.'}
+                </p>
+            );
+        }
+    };
+
+    const renderTimestamp = () => {
+        if (isLoading) {
+            return <LoadingText width="125px" />;
+        } else {
+            return (
+                <p className={styles.timestamp}>
+                    {twitterData ? twitterData.timestamp : '12:00 AM · 1/1/70'}
+                </p>
+            );
+        }
+    };
+
     // JSX
     // TODO: introduce a loading state
-    if (isError) {
-        return <div className={styles.errorPanel}>Could not fetch Tweet :(</div>;
-    } else {
-        return twitterData ? (
-            <div className={styles.tweetPanel}>
-                <div className={styles.profile}>
-                    <div className={styles.pic}>
-                        <Image
-                            src={twitterData.profilePicUrl}
-                            alt="Twitter profile picture"
-                            objectFit="contain"
-                            layout="fill"
-                        />
-                    </div>
-                    <div className={styles.names}>
-                        <span className={styles.displayName}>{twitterData.displayName}</span>
-                        <span className={styles.username}>@czhangy_</span>
-                    </div>
+    return (
+        <div className={styles.tweetPanel}>
+            <div className={styles.profile}>
+                {renderProfilePic()}
+                <div className={`${styles.names} ${isLoading ? styles.loadingNames : ''}`}>
+                    {renderDisplayName()}
+                    {renderUsername()}
                 </div>
-                <p className={styles.tweet}>{twitterData.tweet}</p>
-                <div className={styles.timestamp}>{twitterData.timestamp}</div>
             </div>
-        ) : null;
-    }
+            <div className={styles.tweetContainer}>{renderTweet()}</div>
+            {renderTimestamp()}
+        </div>
+    );
 };
 
 export default TweetPanel;

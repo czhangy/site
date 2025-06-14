@@ -42,6 +42,11 @@ button {
     padding: 0;
 }
 
+// Remove default styling
+p {
+    margin: 0;
+}
+
 *,
 *::before,
 *::after {

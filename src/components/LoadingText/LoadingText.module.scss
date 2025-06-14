@@ -1,0 +1,18 @@
+.loadingText {
+    animation: shimmer 1.5s infinite ease-in-out;
+    background: linear-gradient(90deg, #636363 25%, #6b6b6b 50%, #636363 75%);
+    background-size: 200% 100%;
+    border-radius: 20px;
+    display: block;
+    height: 1rem;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}

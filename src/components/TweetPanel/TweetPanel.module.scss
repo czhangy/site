@@ -1,21 +1,18 @@
-.errorPanel {
-    @include flex-center;
-
-    font-size: 2rem;
-    font-weight: 500;
-    height: 100%;
-}
-
 .tweetPanel {
+    --loading-gap: 0.3rem;
+    --max-lines: 3;
+    --pic-size: 2.5rem;
+
     color: white;
     display: flex;
     flex-direction: column;
     font-family:
         -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
     height: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
     letter-spacing: 0.1px;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem;
+    width: 100%;
 
     .profile {
         align-items: center;
@@ -24,10 +21,10 @@
 
         .pic {
             border-radius: 50%;
-            height: 2.5rem;
+            height: var(--pic-size);
             overflow: hidden;
             position: relative;
-            width: 2.5rem;
+            width: var(--pic-size);
         }
 
         .names {
@@ -35,23 +32,41 @@
             flex-direction: column;
 
             .displayName {
-                font-weight: 700;
-                margin-bottom: 0.3rem;
+                font-weight: bold;
+                margin-bottom: 0.25rem;
             }
 
             .username {
                 color: grey;
             }
         }
+
+        .loadingNames {
+            gap: var(--loading-gap);
+        }
     }
 
-    .tweet {
-        -webkit-box-orient: vertical;
-        display: -webkit-box;
-        -webkit-line-clamp: 3; /* number of lines */
-        line-clamp: 3; /* number of lines */
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .tweetContainer {
+        align-items: center;
+        display: flex;
+        height: 3.9rem;
+        width: 100%;
+
+        .tweet {
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            -webkit-line-clamp: var(--max-lines); /* number of lines */
+            line-clamp: var(--max-lines); /* number of lines */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .loadingTweet {
+            display: flex;
+            flex-direction: column;
+            gap: var(--loading-gap);
+            width: 100%;
+        }
     }
 
     .timestamp {

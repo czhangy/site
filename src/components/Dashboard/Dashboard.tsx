@@ -9,22 +9,28 @@ const Dashboard: React.FC = () => {
     // JSX
     return (
         <div className={styles.dashboard}>
-            <div className={`${styles.gridPanel} ${styles.panel1}`}>
+            <div className={`${styles.gridPanel} ${styles.projectsNav}`}>
                 <NavPanel linkItem={LINK_ITEMS[1]} />
             </div>
-            <div className={`${styles.gridPanel} ${styles.panel2}`}>
+            <div className={`${styles.gridPanel} ${styles.journalsNav}`}>
                 <NavPanel linkItem={LINK_ITEMS[2]} />
             </div>
-            <div className={`${styles.gridPanel} ${styles.panel3}`}>
+            <div className={`${styles.gridPanel} ${styles.workNav}`}>
                 <NavPanel linkItem={LINK_ITEMS[3]} />
             </div>
-            <div className={`${styles.gridPanel} ${styles.panel4}`}>
+            <div className={`${styles.gridPanel} ${styles.weather}`}>
+                <GlowPanel>weather</GlowPanel>
+            </div>
+            <div className={`${styles.gridPanel} ${styles.latestTweet}`}>
                 <GlowPanel>
                     <TweetPanel />
                 </GlowPanel>
             </div>
-            <div className={`${styles.gridPanel} ${styles.panel5}`}>
-                <GlowPanel>Weather</GlowPanel>
+            <div className={`${styles.gridPanel} ${styles.funFact}`}>
+                <GlowPanel>fun fact</GlowPanel>
+            </div>
+            <div className={`${styles.gridPanel} ${styles.tbd}`}>
+                <GlowPanel>tbd</GlowPanel>
             </div>
         </div>
     );
