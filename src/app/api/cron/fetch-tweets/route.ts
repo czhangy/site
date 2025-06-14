@@ -48,8 +48,10 @@ export async function GET(): Promise<NextResponse> {
             timestamp: tweetData.created_at,
         };
 
+        console.log('Prepared Twitter data:', tweetRecord);
+
         // Save to Supabase
-        const { data, error } = await supabase.from('tweets').update([tweetRecord]).eq('id', 1);
+        const { data, error } = await supabase.from('tweet').update([tweetRecord]).eq('id', 1);
 
         if (error) {
             throw new Error(`Supabase error: ${error.message}`);
