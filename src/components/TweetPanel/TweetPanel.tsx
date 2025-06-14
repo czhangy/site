@@ -12,32 +12,33 @@ const TweetPanel: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [twitterData, setTwitterData] = useState<TwitterData | null>(null);
     useEffect(() => {
+        const fetchTwitterData = async () => {
+            setIsLoading(true);
+
+            // Read access is public on the Tweet table
+            const { data, error } = await supabase.from('tweet').select('*');
+
+            if (error) {
+                console.error('Error fetching tweet data', error);
+            } else {
+                const tweetData = data[0];
+                const fetchedTwitterData: TwitterData = {
+                    profilePicUrl: tweetData.profile_pic_url,
+                    displayName: parseEscapedEmojis(tweetData.display_name),
+                    tweet: parseEscapedEmojis(tweetData.tweet),
+                    timestamp: formatTimestamp(tweetData.timestamp),
+                };
+                setTwitterData(fetchedTwitterData);
+            }
+
+            // Use a timeout to let twitterData get set before revealing
+            setTimeout(() => setIsLoading(false), 500);
+        };
+
         fetchTwitterData();
     }, []);
 
     // Helpers
-    const fetchTwitterData = async () => {
-        setIsLoading(true);
-
-        // Read access is public on the Tweet table
-        const { data, error } = await supabase.from('tweet').select('*');
-
-        if (error) {
-            console.error('Error fetching tweet data', error);
-        } else {
-            const tweetData = data[0];
-            const fetchedTwitterData: TwitterData = {
-                profilePicUrl: tweetData.profile_pic_url,
-                displayName: parseEscapedEmojis(tweetData.display_name),
-                tweet: parseEscapedEmojis(tweetData.tweet),
-                timestamp: formatTimestamp(tweetData.timestamp),
-            };
-            setTwitterData(fetchedTwitterData);
-        }
-
-        // Use a timeout to let twitterData get set before revealing
-        setTimeout(() => setIsLoading(false), 500);
-    };
 
     const parseEscapedEmojis = (text: string) => {
         // Supabase escapes the Unicode representation of emojis (i.e., \\u...) so we
