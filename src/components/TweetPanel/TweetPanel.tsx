@@ -8,6 +8,7 @@ import styles from './TweetPanel.module.scss';
 
 const TweetPanel: React.FC = () => {
     // Hooks
+    const [isError, setIsError] = useState<boolean>(false);
     const [twitterData, setTwitterData] = useState<TwitterData | null>(null);
     useEffect(() => {
         fetchTwitterData();
@@ -19,8 +20,8 @@ const TweetPanel: React.FC = () => {
         const { data, error } = await supabase.from('tweet').select('*');
 
         if (error) {
-            // TODO: introduce an error state
             console.error('Error fetching tweet data', error);
+            setIsError(true);
         } else {
             const tweetData = data[0];
             const fetchedTwitterData: TwitterData = {
@@ -83,26 +84,30 @@ const TweetPanel: React.FC = () => {
 
     // JSX
     // TODO: introduce a loading state
-    return twitterData ? (
-        <div className={styles.tweetPanel}>
-            <div className={styles.profile}>
-                <div className={styles.pic}>
-                    <Image
-                        src={twitterData.profilePicUrl}
-                        alt="Twitter profile picture"
-                        objectFit="contain"
-                        layout="fill"
-                    />
+    if (isError) {
+        return <div className={styles.errorPanel}>Could not fetch Tweet :(</div>;
+    } else {
+        return twitterData ? (
+            <div className={styles.tweetPanel}>
+                <div className={styles.profile}>
+                    <div className={styles.pic}>
+                        <Image
+                            src={twitterData.profilePicUrl}
+                            alt="Twitter profile picture"
+                            objectFit="contain"
+                            layout="fill"
+                        />
+                    </div>
+                    <div className={styles.names}>
+                        <span className={styles.displayName}>{twitterData.displayName}</span>
+                        <span className={styles.username}>@czhangy_</span>
+                    </div>
                 </div>
-                <div className={styles.names}>
-                    <span className={styles.displayName}>{twitterData.displayName}</span>
-                    <span className={styles.username}>@czhangy_</span>
-                </div>
+                <p className={styles.tweet}>{twitterData.tweet}</p>
+                <div className={styles.timestamp}>{twitterData.timestamp}</div>
             </div>
-            <p className={styles.tweet}>{twitterData.tweet}</p>
-            <div className={styles.timestamp}>{twitterData.timestamp}</div>
-        </div>
-    ) : null;
+        ) : null;
+    }
 };
 
 export default TweetPanel;
