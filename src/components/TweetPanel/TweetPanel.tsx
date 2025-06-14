@@ -39,7 +39,6 @@ const TweetPanel: React.FC = () => {
     }, []);
 
     // Helpers
-
     const parseEscapedEmojis = (text: string) => {
         // Supabase escapes the Unicode representation of emojis (i.e., \\u...) so we
         // need to escape them in case an emoji exists in the display name or tweet
