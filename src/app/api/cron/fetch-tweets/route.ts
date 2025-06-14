@@ -1,8 +1,8 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 
-const supabaseUrl: string = process.env.SUPABASE_URL!;
-const supabaseKey: string = process.env.SUPABASE_ANON_KEY!;
+const supabaseUrl: string = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey: string = process.env.SUPABASE_SECRET_KEY!;
 const twitterBearerToken: string = process.env.TWITTER_BEARER_TOKEN!;
 
 const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
