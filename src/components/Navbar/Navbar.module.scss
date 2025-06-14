@@ -21,13 +21,6 @@
     }
 }
 
-// Desktop layout
-@media (min-width: $tablet) {
-    .navbar > .container {
-        padding: 0 1.5rem;
-    }
-}
-
 // Hover effects
 @media (hover: hover) and (pointer: fine) {
     .navbar > .container .logo:hover {

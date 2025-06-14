@@ -9,7 +9,7 @@
         width: 2.5rem;
 
         .hamburger {
-            background: $secondary-color;
+            background: $primary-color;
             height: 2px;
             margin: 2px 0;
             transform-origin: center;
@@ -34,7 +34,7 @@
     }
 
     .mobileMenu {
-        background-color: $bg-color;
+        border-bottom: 2px solid $primary-color;
         left: 0;
         opacity: 0;
         pointer-events: none;
@@ -48,7 +48,7 @@
         visibility: hidden;
 
         &.open {
-            background-color: #232325;
+            background-color: rgb(29 29 29);
             opacity: 1;
             pointer-events: all;
             transform: translateY(0);

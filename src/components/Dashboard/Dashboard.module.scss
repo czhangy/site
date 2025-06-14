@@ -1,14 +1,12 @@
 .dashboard {
     display: grid;
     gap: 8px;
-    grid-template-rows: repeat(2, 1fr);
-    padding: 0 2rem;
+    grid-template-rows: repeat(2, 200px);
     width: 100%;
 
     .gridPanel {
         background-color: $dark-bg-color;
         border-radius: 4px;
-        height: 200px;
     }
 
     .panel1 {
@@ -36,7 +34,7 @@
 @media (min-width: $tablet) {
     .dashboard {
         grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 1fr);
+        grid-template-rows: 150px 200px;
 
         .panel1 {
             display: block;
