@@ -96,9 +96,6 @@ const WeatherPanel: React.FC = () => {
     } else {
         return (
             <div className={`${styles.weatherPanel} ${styles[weatherData.weather.toLowerCase()]}`}>
-                <p className={styles.city}>{weatherData.cityName}</p>
-                <p className={styles.temperature}>{weatherData.temperature}</p>
-                <p className={styles.condition}>{weatherData.weather}</p>
                 <div className={styles.icon}>
                     <Image
                         src={`/${weatherData.weather.toLowerCase()}.svg`}
@@ -106,6 +103,11 @@ const WeatherPanel: React.FC = () => {
                         layout="fill"
                         objectFit="contain"
                     />
+                </div>
+                <div className={styles.text}>
+                    <p className={styles.city}>{weatherData.cityName}</p>
+                    <p className={styles.temperature}>{weatherData.temperature}</p>
+                    <p className={styles.condition}>{weatherData.weather}</p>
                 </div>
             </div>
         );
