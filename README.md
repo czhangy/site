@@ -9,12 +9,12 @@ Personal website for real this time
 ## To-Do
 
 - Fill out dashboard
-    - Implement daily Twitter fetch
     - Implement location/weather fetch
+    - TBD panel
+    - Fun facts
 - Implement projects
 - Implement journals
 - Implement work
-- Implement cURL API for lightweight updates
 - Implement 404 page
 
 ## Env
@@ -25,3 +25,12 @@ The following environment variables are used in this project:
 - `NEXT_PUBLIC_SUPABASE_KEY`
 - `SUPABASE_SECRET_KEY`
 - `TWITTER_BEARER_TOKEN`
+- `GOOGLE_KEY`
+
+## Tech Stack
+
+- NextJS for client/server
+- Vercel for deployment/crons
+- Supabase for DB
+- Google API for geocoding
+- Open-Meteo for weather data
