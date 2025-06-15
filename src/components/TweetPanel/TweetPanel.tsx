@@ -1,6 +1,6 @@
 'use client';
 
-import { supabase } from '@/lib/supabase';
+import { fetchSingleRow } from '@/utils/helpers';
 import { TwitterData } from '@/utils/interfaces';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
@@ -9,30 +9,29 @@ import styles from './TweetPanel.module.scss';
 
 const TweetPanel: React.FC = () => {
     // Hooks
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isError, setIsError] = useState<boolean>(false);
     const [twitterData, setTwitterData] = useState<TwitterData | null>(null);
     useEffect(() => {
         const fetchTwitterData = async () => {
             setIsLoading(true);
 
             // Read access is public on the Tweet table
-            const { data, error } = await supabase.from('tweet').select('*');
+            const data = await fetchSingleRow('tweet');
 
-            if (error) {
-                console.error('Error fetching tweet data', error);
-            } else {
-                const tweetData = data[0];
+            if (data) {
                 const fetchedTwitterData: TwitterData = {
-                    profilePicUrl: tweetData.profile_pic_url,
-                    displayName: parseEscapedEmojis(tweetData.display_name),
-                    tweet: parseEscapedEmojis(tweetData.tweet),
-                    timestamp: formatTimestamp(tweetData.timestamp),
+                    profilePicUrl: data.profile_pic_url,
+                    displayName: parseEscapedEmojis(data.display_name),
+                    tweet: parseEscapedEmojis(data.tweet),
+                    timestamp: formatTimestamp(data.timestamp),
                 };
                 setTwitterData(fetchedTwitterData);
+            } else {
+                setIsError(true);
             }
 
-            // Use a timeout to let twitterData get set before revealing
-            setTimeout(() => setIsLoading(false), 500);
+            setIsLoading(false);
         };
 
         fetchTwitterData();
@@ -88,32 +87,51 @@ const TweetPanel: React.FC = () => {
     };
 
     const renderProfilePic = () => {
-        return (
-            <div className={styles.pic}>
-                <Image
-                    src={twitterData ? twitterData!.profilePicUrl : '/placeholder.webp'}
-                    alt="Twitter profile picture"
-                    objectFit="contain"
-                    layout="fill"
-                />
-            </div>
-        );
-    };
-
-    const renderDisplayName = () => {
-        if (isLoading) {
-            return <LoadingText width="100px" />;
+        if (isError) {
+            return (
+                <div className={styles.pic}>
+                    <Image
+                        src="/placeholder.webp"
+                        alt="Twitter profile picture"
+                        objectFit="contain"
+                        layout="fill"
+                    />
+                </div>
+            );
+        } else if (isLoading || !twitterData) {
+            return (
+                <div className={styles.pic}>
+                    <div className={styles.loadingPic} />
+                </div>
+            );
         } else {
             return (
-                <span className={styles.displayName}>
-                    {twitterData ? twitterData.displayName : 'Charles Zhang'}
-                </span>
+                <div className={styles.pic}>
+                    <Image
+                        src={twitterData.profilePicUrl}
+                        alt="Twitter profile picture"
+                        objectFit="contain"
+                        layout="fill"
+                    />
+                </div>
             );
         }
     };
 
+    const renderDisplayName = () => {
+        if (isError) {
+            return <span className={styles.displayName}>Charles Zhang</span>;
+        } else if (isLoading || !twitterData) {
+            return <LoadingText width="100px" />;
+        } else {
+            return <span className={styles.displayName}>{twitterData.displayName}</span>;
+        }
+    };
+
     const renderUsername = () => {
-        if (isLoading) {
+        if (isError) {
+            return <span className={styles.username}>@czhangy_</span>;
+        } else if (isLoading || !twitterData) {
             return <LoadingText width="90px" />;
         } else {
             return <span className={styles.username}>@czhangy_</span>;
@@ -121,7 +139,13 @@ const TweetPanel: React.FC = () => {
     };
 
     const renderTweet = () => {
-        if (isLoading) {
+        if (isError) {
+            return (
+                <p className={styles.tweet}>
+                    something went wrong while fetching my latest tweet. fuck you twitter.
+                </p>
+            );
+        } else if (isLoading || !twitterData) {
             return (
                 <div className={`${styles.tweet} ${styles.loadingTweet}`}>
                     <LoadingText width="100%" />
@@ -130,25 +154,17 @@ const TweetPanel: React.FC = () => {
                 </div>
             );
         } else {
-            return (
-                <p className={styles.tweet}>
-                    {twitterData
-                        ? twitterData.tweet
-                        : 'something went wrong while fetching my latest tweet. fuck you twitter.'}
-                </p>
-            );
+            return <p className={styles.tweet}>{twitterData.tweet}</p>;
         }
     };
 
     const renderTimestamp = () => {
-        if (isLoading) {
+        if (isError) {
+            return <p className={styles.timestamp}>12:00 AM · 1/1/70</p>;
+        } else if (isLoading || !twitterData) {
             return <LoadingText width="125px" />;
         } else {
-            return (
-                <p className={styles.timestamp}>
-                    {twitterData ? twitterData.timestamp : '12:00 AM · 1/1/70'}
-                </p>
-            );
+            return <p className={styles.timestamp}>{twitterData.timestamp}</p>;
         }
     };
 

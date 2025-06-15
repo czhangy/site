@@ -1,3 +1,5 @@
+import { WeatherCondition } from '@/utils/types';
+
 export interface LinkItem {
     display: string;
     href: string;
@@ -14,4 +16,16 @@ export interface TwitterData {
     displayName: string;
     tweet: string;
     timestamp: string;
+}
+
+export interface LocationData {
+    cityName: string;
+    latitude: number;
+    longitude: number;
+}
+
+export interface WeatherData {
+    cityName: string;
+    weather: WeatherCondition;
+    temperature: string;
 }

@@ -1,12 +1,10 @@
 .glowPanel {
     @include fill-space;
-
-    align-items: center;
-    display: flex;
-    justify-content: center;
+    @include flex-center;
 
     .glowPanelContainer {
         @include fill-space;
+        @include flex-center;
 
         border-radius: 4px;
         overflow: hidden;
