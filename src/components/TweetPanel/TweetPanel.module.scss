@@ -1,18 +1,17 @@
 .tweetPanel {
-    --loading-gap: 0.3rem;
     --max-lines: 3;
     --pic-size: 2.5rem;
+
+    @include fill-space;
 
     color: white;
     display: flex;
     flex-direction: column;
     font-family:
         -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
-    height: 100%;
     justify-content: space-between;
     letter-spacing: 0.1px;
     padding: 1.5rem;
-    width: 100%;
 
     .profile {
         align-items: center;
@@ -25,24 +24,26 @@
             overflow: hidden;
             position: relative;
             width: var(--pic-size);
+
+            .loadingPic {
+                background-color: $loading-color;
+                height: var(--pic-size);
+                width: var(--pic-size);
+            }
         }
 
         .names {
             display: flex;
             flex-direction: column;
+            gap: 0.25rem;
 
             .displayName {
                 font-weight: bold;
-                margin-bottom: 0.25rem;
             }
 
             .username {
                 color: grey;
             }
-        }
-
-        .loadingNames {
-            gap: var(--loading-gap);
         }
     }
 
@@ -64,7 +65,7 @@
         .loadingTweet {
             display: flex;
             flex-direction: column;
-            gap: var(--loading-gap);
+            gap: 0.3rem;
             width: 100%;
         }
     }

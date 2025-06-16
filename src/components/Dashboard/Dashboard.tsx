@@ -1,6 +1,7 @@
 import GlowPanel from '@/components/GlowPanel/GlowPanel';
 import NavPanel from '@/components/NavPanel/NavPanel';
 import TweetPanel from '@/components/TweetPanel/TweetPanel';
+import WeatherPanel from '@/components/WeatherPanel/WeatherPanel';
 import { LINK_ITEMS } from '@/utils/constants';
 import React from 'react';
 import styles from './Dashboard.module.scss';
@@ -19,7 +20,9 @@ const Dashboard: React.FC = () => {
                 <NavPanel linkItem={LINK_ITEMS[3]} />
             </div>
             <div className={`${styles.gridPanel} ${styles.weather}`}>
-                <GlowPanel>weather</GlowPanel>
+                <GlowPanel>
+                    <WeatherPanel />
+                </GlowPanel>
             </div>
             <div className={`${styles.gridPanel} ${styles.latestTweet}`}>
                 <GlowPanel>
