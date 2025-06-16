@@ -1,7 +1,7 @@
 'use client';
 
 import { fetchSingleRow } from '@/utils/helpers';
-import { LocationData, WeatherData } from '@/utils/interfaces';
+import { CachedWeatherData, LocationData, WeatherData } from '@/utils/interfaces';
 import { WeatherCondition } from '@/utils/types';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
@@ -9,11 +9,37 @@ import LoadingSymbol from '../LoadingSymbol/LoadingSymbol';
 import styles from './WeatherPanel.module.scss';
 
 const WeatherPanel: React.FC = () => {
+    // Constants
+    const CACHE_KEY = 'weatherData';
+
     // Hooks
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isError, setIsError] = useState<boolean>(false);
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     useEffect(() => {
+        const maybeFetchWeatherDataFromLocalStorage = (): WeatherData | null => {
+            const cacheString: string | null = localStorage.getItem(CACHE_KEY);
+
+            if (cacheString) {
+                const cacheData: CachedWeatherData = JSON.parse(cacheString);
+
+                // Check if cached data is expired
+                if (new Date() <= new Date(cacheData.expiry)) {
+                    return {
+                        cityName: cacheData.cityName,
+                        weather: cacheData.weather,
+                        temperature: cacheData.temperature,
+                    };
+                } else {
+                    // Clear cache if expired
+                    localStorage.removeItem(CACHE_KEY);
+                }
+            }
+
+            // If key not in local storage, or key is expired. return null (not found)
+            return null;
+        };
+
         const mapWeatherCondition = (code: number): WeatherCondition => {
             // https://open-meteo.com/en/docs?current=weather_code,temperature_2m#weather_variable_documentation
             if (code >= 95) {
@@ -44,32 +70,55 @@ const WeatherPanel: React.FC = () => {
             }
         };
 
+        const cacheWeatherData = (data: WeatherData) => {
+            const now = new Date();
+            const expiry = new Date(now.getTime() + 60 * 60 * 1000);
+
+            const cacheData: CachedWeatherData = {
+                ...data,
+                expiry: expiry,
+            };
+
+            localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+        };
+
         const fetchWeatherData = async () => {
             setIsLoading(true);
 
-            const locationData = await fetchLocationData();
-            if (locationData) {
-                const url = `https://api.open-meteo.com/v1/forecast?temperature_unit=fahrenheit&latitude=${locationData.latitude}&longitude=${locationData.longitude}&current=temperature_2m,weather_code&timezone=auto`;
+            const weatherData = maybeFetchWeatherDataFromLocalStorage();
 
-                try {
-                    const weatherResponse = await fetch(url);
-                    if (!weatherResponse.ok) {
-                        throw new Error(`HTTP error! status: ${weatherResponse.status}`);
+            if (weatherData) {
+                // Check local storage for any cached location data
+                setWeatherData(weatherData);
+            } else {
+                // If the weather data isn't in local storage, generate it from API
+                const locationData = await fetchLocationData();
+                if (locationData) {
+                    try {
+                        const url = `https://api.open-meteo.com/v1/forecast?temperature_unit=fahrenheit&latitude=${locationData.latitude}&longitude=${locationData.longitude}&current=temperature_2m,weather_code&timezone=auto`;
+                        const weatherResponse = await fetch(url);
+                        if (!weatherResponse.ok) {
+                            throw new Error(`HTTP error! status: ${weatherResponse.status}`);
+                        }
+
+                        const data = await weatherResponse.json();
+                        const weatherData: WeatherData = {
+                            cityName: locationData.cityName,
+                            weather: mapWeatherCondition(data.current.weather_code),
+                            temperature: `${Math.round(data.current.temperature_2m)}${data.current_units.temperature_2m}`,
+                        };
+
+                        // Save weather data + expiry to local storage
+                        cacheWeatherData(weatherData);
+
+                        setWeatherData(weatherData);
+                    } catch (error) {
+                        console.error('Error fetching weather data:', error);
+                        setIsError(true);
                     }
-
-                    const data = await weatherResponse.json();
-                    const weatherData: WeatherData = {
-                        cityName: locationData.cityName,
-                        weather: mapWeatherCondition(data.current.weather_code),
-                        temperature: `${Math.round(data.current.temperature_2m)}${data.current_units.temperature_2m}`,
-                    };
-                    setWeatherData(weatherData);
-                } catch (error) {
-                    console.error('Error fetching weather data:', error);
+                } else {
                     setIsError(true);
                 }
-            } else {
-                setIsError(true);
             }
 
             setIsLoading(false);

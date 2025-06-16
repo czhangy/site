@@ -82,7 +82,7 @@
         }
 
         .temperature {
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
 
         .condition {
@@ -98,6 +98,10 @@
 
         .text {
             gap: 1rem;
+
+            .temperature {
+                font-size: 3rem;
+            }
         }
     }
 }

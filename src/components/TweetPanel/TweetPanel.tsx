@@ -48,7 +48,6 @@ const TweetPanel: React.FC = () => {
 
     const formatTimestamp = (isoString: string): string => {
         try {
-            console.log(isoString);
             const date = new Date(isoString);
 
             // Check if date is valid
