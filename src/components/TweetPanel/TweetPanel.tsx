@@ -90,10 +90,10 @@ const TweetPanel: React.FC = () => {
             return (
                 <div className={styles.pic}>
                     <Image
+                        className="next-image"
                         src="/placeholder.webp"
                         alt="Twitter profile picture"
-                        objectFit="contain"
-                        layout="fill"
+                        fill
                     />
                 </div>
             );
@@ -107,10 +107,11 @@ const TweetPanel: React.FC = () => {
             return (
                 <div className={styles.pic}>
                     <Image
+                        className="next-image"
                         src={twitterData.profilePicUrl}
                         alt="Twitter profile picture"
-                        objectFit="contain"
-                        layout="fill"
+                        fill
+                        sizes="2.5rem"
                     />
                 </div>
             );

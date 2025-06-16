@@ -147,10 +147,11 @@ const WeatherPanel: React.FC = () => {
             <div className={`${styles.weatherPanel} ${styles[weatherData.weather.toLowerCase()]}`}>
                 <div className={styles.icon}>
                     <Image
+                        className="next-image"
                         src={`/${weatherData.weather.toLowerCase()}.svg`}
                         alt={`${weatherData.weather} weather icon`}
-                        layout="fill"
-                        objectFit="contain"
+                        fill
+                        priority
                     />
                 </div>
                 <div className={styles.text}>
