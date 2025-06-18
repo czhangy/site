@@ -27,6 +27,7 @@ export interface WeatherData {
     cityName: string;
     weather: WeatherCondition;
     temperature: string;
+    isDay: boolean;
 }
 
 // Defines the data needed to be cached in WeatherPanel
