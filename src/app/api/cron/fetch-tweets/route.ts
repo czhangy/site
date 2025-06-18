@@ -20,7 +20,9 @@ export async function GET(): Promise<NextResponse> {
             }
         );
         if (!userResponse.ok) {
-            throw new Error(`Twitter API error: ${userResponse.status} ${userResponse.statusText}`);
+            throw new Error(
+                `Twitter user API error: ${userResponse.status} ${userResponse.statusText}`
+            );
         }
         const tweetResponse: Response = await fetch(
             'https://api.x.com/2/users/1358995165579337729/tweets?max_results=5&tweet.fields=created_at',
@@ -33,7 +35,7 @@ export async function GET(): Promise<NextResponse> {
         );
         if (!tweetResponse.ok) {
             throw new Error(
-                `Twitter API error: ${tweetResponse.status} ${tweetResponse.statusText}`
+                `Twitter tweet API error: ${tweetResponse.status} ${tweetResponse.statusText}`
             );
         }
 
