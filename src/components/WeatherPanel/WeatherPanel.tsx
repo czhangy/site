@@ -18,6 +18,7 @@ const WeatherPanel: React.FC = () => {
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     useEffect(() => {
         const maybeFetchWeatherDataFromLocalStorage = (): WeatherData | null => {
+            return null;
             const cacheString: string | null = localStorage.getItem(CACHE_KEY);
 
             if (cacheString) {
@@ -41,6 +42,7 @@ const WeatherPanel: React.FC = () => {
         };
 
         const mapWeatherCondition = (code: number): WeatherCondition => {
+            return 'Snowing';
             // https://open-meteo.com/en/docs?current=weather_code,temperature_2m#weather_variable_documentation
             if (code >= 95) {
                 return 'Thunderstorm';
@@ -144,7 +146,9 @@ const WeatherPanel: React.FC = () => {
         return <LoadingSymbol />;
     } else {
         return (
-            <div className={`${styles.weatherPanel} ${styles[weatherData.weather.toLowerCase()]}`}>
+            <div
+                className={`${styles.weatherPanel} ${styles[`${weatherData.weather.toLowerCase()}-night`]}`}
+            >
                 <div className={styles.icon}>
                     <Image
                         className="next-image"
