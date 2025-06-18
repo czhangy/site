@@ -1,4 +1,6 @@
 .footer {
+    --icon-size: 2rem;
+
     background-color: $dark-bg-color;
     position: relative;
     z-index: $nav-z;
@@ -7,8 +9,9 @@
         @include container;
         @include flex-center;
 
-        height: 6rem;
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 2rem;
 
         .credits {
             color: white;
@@ -19,17 +22,26 @@
         .links {
             @include flex-center;
 
-            gap: 2rem;
+            gap: 1.5rem;
 
             .icon {
                 color: white;
-                height: 2em;
+                height: var(--icon-size);
                 overflow: hidden;
                 transition: all 0.2s ease;
                 vertical-align: middle;
-                width: 2rem;
+                width: var(--icon-size);
             }
         }
+    }
+}
+
+// Tablet layout
+@media (min-width: $tablet) {
+    .footer > .container {
+        flex-direction: row;
+        gap: 0;
+        justify-content: space-between;
     }
 }
 
