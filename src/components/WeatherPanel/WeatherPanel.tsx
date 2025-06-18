@@ -18,7 +18,6 @@ const WeatherPanel: React.FC = () => {
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     useEffect(() => {
         const maybeFetchWeatherDataFromLocalStorage = (): WeatherData | null => {
-            return null;
             const cacheString: string | null = localStorage.getItem(CACHE_KEY);
 
             if (cacheString) {
@@ -30,6 +29,7 @@ const WeatherPanel: React.FC = () => {
                         cityName: cacheData.cityName,
                         weather: cacheData.weather,
                         temperature: cacheData.temperature,
+                        isDay: cacheData.isDay,
                     };
                 } else {
                     // Clear cache if expired
@@ -42,7 +42,6 @@ const WeatherPanel: React.FC = () => {
         };
 
         const mapWeatherCondition = (code: number): WeatherCondition => {
-            return 'Snowing';
             // https://open-meteo.com/en/docs?current=weather_code,temperature_2m#weather_variable_documentation
             if (code >= 95) {
                 return 'Thunderstorm';
@@ -97,17 +96,22 @@ const WeatherPanel: React.FC = () => {
                 const locationData = await fetchLocationData();
                 if (locationData) {
                     try {
-                        const url = `https://api.open-meteo.com/v1/forecast?temperature_unit=fahrenheit&latitude=${locationData.latitude}&longitude=${locationData.longitude}&current=temperature_2m,weather_code&timezone=auto`;
+                        const url = `https://api.open-meteo.com/v1/forecast?temperature_unit=fahrenheit&latitude=${locationData.latitude}&longitude=${locationData.longitude}&current=temperature_2m,weather_code&daily=sunrise,sunset&timezone=auto`;
                         const weatherResponse = await fetch(url);
                         if (!weatherResponse.ok) {
                             throw new Error(`HTTP error! status: ${weatherResponse.status}`);
                         }
 
                         const data = await weatherResponse.json();
+                        const now = new Date();
+                        const sunrise = new Date(data.daily.sunrise[0]);
+                        const sunset = new Date(data.daily.sunset[0]);
+
                         const weatherData: WeatherData = {
                             cityName: locationData.cityName,
                             weather: mapWeatherCondition(data.current.weather_code),
                             temperature: `${Math.round(data.current.temperature_2m)}${data.current_units.temperature_2m}`,
+                            isDay: now >= sunrise && now < sunset,
                         };
 
                         // Save weather data + expiry to local storage
@@ -129,6 +133,16 @@ const WeatherPanel: React.FC = () => {
         fetchWeatherData();
     }, []);
 
+    // Helpers
+    const getWeatherSlug = (): string => {
+        if (!weatherData) {
+            return '';
+        }
+        const prefix = `${weatherData.weather.toLowerCase()}-`;
+        const suffix = weatherData.isDay ? 'day' : 'night';
+        return prefix + suffix;
+    };
+
     // JSX
     if (isError) {
         return (
@@ -146,13 +160,11 @@ const WeatherPanel: React.FC = () => {
         return <LoadingSymbol />;
     } else {
         return (
-            <div
-                className={`${styles.weatherPanel} ${styles[`${weatherData.weather.toLowerCase()}-night`]}`}
-            >
+            <div className={`${styles.weatherPanel} ${styles[getWeatherSlug()]}`}>
                 <div className={styles.icon}>
                     <Image
                         className="next-image"
-                        src={`/${weatherData.weather.toLowerCase()}.svg`}
+                        src={`/${getWeatherSlug()}.svg`}
                         alt={`${weatherData.weather} weather icon`}
                         fill
                         priority
