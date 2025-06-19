@@ -11,7 +11,7 @@ export async function GET(): Promise<NextResponse> {
     try {
         // Get user data
         const userResponse = await fetch(
-            'https://api.twitter.com/2/users/by/username/falco?user.fields=profile_image_url',
+            'https://api.twitter.com/2/users/by/username/czhangy_?user.fields=profile_image_url',
             {
                 headers: {
                     Authorization: `Bearer ${twitterBearerToken}`,
