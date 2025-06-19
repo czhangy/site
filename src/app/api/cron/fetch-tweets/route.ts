@@ -23,6 +23,8 @@ export async function GET(): Promise<NextResponse> {
             throw new Error(
                 `Twitter user API error: ${userResponse.status} ${userResponse.statusText}`
             );
+        } else {
+            console.log(`Twitter user API response: ${userResponse}`);
         }
         const tweetResponse: Response = await fetch(
             'https://api.x.com/2/users/1358995165579337729/tweets?max_results=5&tweet.fields=created_at',
@@ -37,6 +39,8 @@ export async function GET(): Promise<NextResponse> {
             throw new Error(
                 `Twitter tweet API error: ${tweetResponse.status} ${tweetResponse.statusText}`
             );
+        } else {
+            console.log(`Twitter tweet API response: ${tweetResponse}`);
         }
 
         const userData = await userResponse.json();
