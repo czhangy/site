@@ -9,13 +9,12 @@ const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
 
 export async function GET(): Promise<NextResponse> {
     try {
-        // Fetch data from Twitter API
-        const userResponse: Response = await fetch(
-            'https://api.twitter.com/2/users/1358995165579337729?user.fields=profile_image_url',
+        // Get user data
+        const userResponse = await fetch(
+            'https://api.twitter.com/2/users/by/username/falco?user.fields=profile_image_url',
             {
                 headers: {
                     Authorization: `Bearer ${twitterBearerToken}`,
-                    'Content-Type': 'application/json',
                 },
             }
         );
@@ -23,28 +22,27 @@ export async function GET(): Promise<NextResponse> {
             throw new Error(
                 `Twitter user API error: ${userResponse.status} ${userResponse.statusText}`
             );
-        } else {
-            console.log(`Twitter user API response: ${userResponse}`);
         }
-        const tweetResponse: Response = await fetch(
-            'https://api.x.com/2/users/1358995165579337729/tweets?max_results=5&tweet.fields=created_at',
-            {
-                headers: {
-                    Authorization: `Bearer ${twitterBearerToken}`,
-                    'Content-Type': 'application/json',
-                },
-            }
+
+        // Parse user data
+        const userData = (await userResponse.json()).data;
+        const userId = userData.id;
+        console.log(`Twitter user API response: ${JSON.stringify(userData)}`);
+
+        // Get latest tweet
+        const tweetResponse = await fetch(
+            `https://api.x.com/2/users/${userId}/tweets?max_results=5&tweet.fields=created_at`,
+            { headers: { Authorization: `Bearer ${twitterBearerToken}` } }
         );
         if (!tweetResponse.ok) {
             throw new Error(
                 `Twitter tweet API error: ${tweetResponse.status} ${tweetResponse.statusText}`
             );
-        } else {
-            console.log(`Twitter tweet API response: ${tweetResponse}`);
         }
 
-        const userData = await userResponse.json();
-        const tweetData = await tweetResponse.json();
+        // Parse tweet data
+        const tweetData = (await tweetResponse.json()).data[0];
+        console.log(`Twitter tweet API response: ${JSON.stringify(tweetData)}`);
 
         // Prepare record for Supabase
         const tweetRecord = {
@@ -57,7 +55,7 @@ export async function GET(): Promise<NextResponse> {
         console.log('Prepared Twitter data:', tweetRecord);
 
         // Save to Supabase
-        const { data, error } = await supabase.from('tweet').update([tweetRecord]).eq('id', 1);
+        const { data, error } = await supabase.from('tweet').update(tweetRecord).eq('id', 1);
 
         if (error) {
             throw new Error(`Supabase error: ${error.message}`);
