@@ -1,3 +1,4 @@
+import FunFactPanel from '@/components/FunFactPanel/FunFactPanel';
 import GlowPanel from '@/components/GlowPanel/GlowPanel';
 import NavPanel from '@/components/NavPanel/NavPanel';
 import TweetPanel from '@/components/TweetPanel/TweetPanel';
@@ -30,7 +31,9 @@ const Dashboard: React.FC = () => {
                 </GlowPanel>
             </div>
             <div className={`${styles.gridPanel} ${styles.funFact}`}>
-                <GlowPanel>fun fact</GlowPanel>
+                <GlowPanel>
+                    <FunFactPanel />
+                </GlowPanel>
             </div>
             <div className={`${styles.gridPanel} ${styles.tbd}`}>
                 <GlowPanel>tbd</GlowPanel>
