@@ -1,7 +1,20 @@
 .funFactPanel {
+    @include flex-center;
+
     padding: 2rem;
 
     .text {
         letter-spacing: 1px;
+        z-index: 1;
+    }
+
+    .icon {
+        font-size: 12rem;
+        opacity: 0.1;
+        position: absolute;
+        right: -3rem;
+        top: -4rem;
+        transform: rotate(30deg);
+        z-index: 0;
     }
 }

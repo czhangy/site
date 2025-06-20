@@ -34,3 +34,9 @@ export interface WeatherData {
 export interface CachedWeatherData extends WeatherData {
     expiry: Date;
 }
+
+// Defines the data needed to populate FunFactsPanel
+export interface FunFactData {
+    fact: string;
+    emoji: string;
+}
