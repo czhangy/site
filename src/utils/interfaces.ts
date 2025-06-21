@@ -40,3 +40,11 @@ export interface FunFactData {
     fact: string;
     emoji: string;
 }
+
+// Defines the data needed to populate SpotifyPanel
+export interface SpotifyData {
+    songName: string;
+    artist: string;
+    albumCoverUrl: string;
+    spotifyUrl: string;
+}

@@ -1,0 +1,47 @@
+.spotifyPanel {
+    --album-size: 3rem;
+    --link-size: 2rem;
+
+    padding: 2rem;
+    width: 100%;
+
+    .info {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        .songInfo {
+            @include flex-center;
+
+            gap: 0.5rem;
+
+            .album {
+                border-radius: 4px;
+                height: var(--album-size);
+                overflow: hidden;
+                position: relative;
+                width: var(--album-size);
+            }
+
+            .text {
+                font-family: Inter, Arial, Helvetica, sans-serif;
+
+                .song {
+                    color: white;
+                    font-weight: bold;
+                    margin-bottom: 0.25rem;
+                }
+
+                .artist {
+                    color: grey;
+                }
+            }
+        }
+
+        .link {
+            height: var(--link-size);
+            width: var(--link-size);
+        }
+    }
+}
