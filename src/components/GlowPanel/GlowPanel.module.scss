@@ -4,9 +4,12 @@
 
     .glowPanelContainer {
         @include fill-space;
-        @include flex-center;
 
+        align-items: center;
         border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
         overflow: hidden;
         position: relative;
 
@@ -36,5 +39,19 @@
                 );
             }
         }
+
+        .title {
+            font-weight: bold;
+            letter-spacing: 8px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+}
+
+// Tablet layout
+@media (min-width: $tablet) {
+    .glowPanel > .glowPanelContainer {
+        justify-content: space-between;
     }
 }

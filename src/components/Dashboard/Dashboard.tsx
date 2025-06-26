@@ -27,17 +27,17 @@ const Dashboard: React.FC = () => {
                 </GlowPanel>
             </div>
             <div className={`${styles.gridPanel} ${styles.latestTweet}`}>
-                <GlowPanel>
+                <GlowPanel pad={true}>
                     <TweetPanel />
                 </GlowPanel>
             </div>
             <div className={`${styles.gridPanel} ${styles.funFact}`}>
-                <GlowPanel>
+                <GlowPanel title="Did You Know?" pad={true}>
                     <FunFactPanel />
                 </GlowPanel>
             </div>
             <div className={`${styles.gridPanel} ${styles.tbd}`}>
-                <GlowPanel>
+                <GlowPanel title="Now Listening" pad={true}>
                     <SpotifyPanel />
                 </GlowPanel>
             </div>

@@ -81,10 +81,7 @@ const FunFactPanel: React.FC = () => {
     } else {
         return (
             <div className={styles.funFactPanel}>
-                <p className={styles.text}>
-                    <strong>Fun Fact: </strong>
-                    {funFact.fact}
-                </p>
+                <p className={styles.fact}>{funFact.fact}</p>
                 <p className={styles.icon}>{funFact.emoji}</p>
             </div>
         );
