@@ -1,8 +1,10 @@
 .loadingSymbol {
     --dot-size: 8px;
 
+    align-items: center;
     display: flex;
     gap: 8px;
+    height: 100%;
 
     .dot {
         animation: bounce 1.4s ease-in-out infinite;

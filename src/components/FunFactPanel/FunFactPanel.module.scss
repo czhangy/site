@@ -1,6 +1,8 @@
 .funFactPanel {
     @include flex-center;
 
+    height: 100%;
+
     .fact {
         letter-spacing: 1px;
         z-index: 1;
