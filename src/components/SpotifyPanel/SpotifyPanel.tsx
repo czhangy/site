@@ -10,7 +10,6 @@ import styles from './SpotifyPanel.module.scss';
 const SpotifyPanel: React.FC = () => {
     // Hooks
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [isError, setIsError] = useState<boolean>(false);
     const [spotifyData, setSpotifyData] = useState<SpotifyData | null>(null);
     useEffect(() => {
         const fetchRecentTrack = async () => {
@@ -25,7 +24,12 @@ const SpotifyPanel: React.FC = () => {
                 const data = await response.json();
                 setSpotifyData(data);
             } catch (err) {
-                setIsError(true);
+                setSpotifyData({
+                    albumCoverUrl: '/placeholder-album-cover.jpg',
+                    songName: 'Dear Maria, Count Me In',
+                    artist: 'All Time Low',
+                    spotifyUrl: 'https://open.spotify.com/track/0JJP0IS4w0fJx01EcrfkDe',
+                });
                 console.error(err);
             } finally {
                 setIsLoading(false);
@@ -36,7 +40,7 @@ const SpotifyPanel: React.FC = () => {
     }, []);
 
     // JSX
-    if (isLoading || isError || !spotifyData) {
+    if (isLoading || !spotifyData) {
         return <LoadingSymbol />;
     } else {
         return (
