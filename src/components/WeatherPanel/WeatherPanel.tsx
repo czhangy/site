@@ -1,11 +1,11 @@
 'use client';
 
+import LoadingSymbol from '@/components/LoadingSymbol/LoadingSymbol';
 import { cacheToLocalStorage, fetchSingleRow, maybeFetchFromLocalStorage } from '@/utils/helpers';
 import { LocationData, WeatherData } from '@/utils/interfaces';
 import { WeatherCondition } from '@/utils/types';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import LoadingSymbol from '../LoadingSymbol/LoadingSymbol';
 import styles from './WeatherPanel.module.scss';
 
 const WeatherPanel: React.FC = () => {

@@ -1,9 +1,9 @@
 'use client';
 
+import LoadingSymbol from '@/components/LoadingSymbol/LoadingSymbol';
 import { supabase } from '@/lib/supabase';
 import { FunFactData } from '@/utils/interfaces';
 import React, { useEffect, useState } from 'react';
-import LoadingSymbol from '../LoadingSymbol/LoadingSymbol';
 import styles from './FunFactPanel.module.scss';
 
 const FunFactPanel: React.FC = () => {

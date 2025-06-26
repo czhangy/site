@@ -1,10 +1,10 @@
 'use client';
 
+import LoadingText from '@/components/LoadingText/LoadingText';
 import { fetchSingleRow } from '@/utils/helpers';
 import { TwitterData } from '@/utils/interfaces';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import LoadingText from '../LoadingText/LoadingText';
 import styles from './TweetPanel.module.scss';
 
 const TweetPanel: React.FC = () => {
