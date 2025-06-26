@@ -3,6 +3,7 @@ require('dotenv').config({ path: '.env.local' });
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const REDIRECT_URI = 'https://example.com/callback';
+const AUTH_CODE = process.env.SPOTIFY_AUTH_CODE;
 
 // 1. Visit this URL in your browser:
 const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=user-read-recently-played`;
@@ -30,6 +31,4 @@ async function getRefreshToken(authCode) {
     return data;
 }
 
-getRefreshToken(
-    'AQAjb0j57koKF8TaLWkdm_LEU8jJVy3w8XTbMLq0kYJgSGdfa_WZZ6_hEDc7y9kxEkn104-gLeuCljsyZj3jrWZhTqFYAB6wnsM7Y9eZAQzAR7r8djZ47rZJn4UXszGNz1pdv3MTB0vWAewMzVGpIxUp8eeR0c-t-kHrxmP8fPEd5e8u60jgelM8GQb3HRCRAELp3CmwCGtHuvw'
-);
+getRefreshToken(AUTH_CODE);
