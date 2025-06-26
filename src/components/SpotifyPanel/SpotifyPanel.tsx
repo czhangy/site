@@ -1,6 +1,7 @@
 'use client';
 
 import LoadingSymbol from '@/components/LoadingSymbol/LoadingSymbol';
+import { cacheToLocalStorage, maybeFetchFromLocalStorage } from '@/utils/helpers';
 import { SpotifyData } from '@/utils/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,32 +9,45 @@ import React, { useEffect, useState } from 'react';
 import styles from './SpotifyPanel.module.scss';
 
 const SpotifyPanel: React.FC = () => {
+    // Constants
+    const CACHE_KEY = 'spotifyData';
+
     // Hooks
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [spotifyData, setSpotifyData] = useState<SpotifyData | null>(null);
     useEffect(() => {
         const fetchRecentTrack = async () => {
-            try {
-                setIsLoading(true);
-                const response = await fetch('/api/spotify/recent-track');
+            setIsLoading(true);
 
-                if (!response.ok) {
-                    throw new Error('Failed to fetch track');
+            const cachedSpotifyData = maybeFetchFromLocalStorage(CACHE_KEY);
+
+            if (cachedSpotifyData) {
+                setSpotifyData(cachedSpotifyData);
+            } else {
+                try {
+                    const response = await fetch('/api/spotify/recent-track');
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch track');
+                    }
+
+                    const data = await response.json();
+                    // Save Spotify data + expiry to local storage
+                    cacheToLocalStorage(data, CACHE_KEY, 10);
+
+                    setSpotifyData(data);
+                } catch (err) {
+                    setSpotifyData({
+                        albumCoverUrl: '/placeholder-album-cover.jpg',
+                        songName: 'Dear Maria, Count Me In',
+                        artist: 'All Time Low',
+                        spotifyUrl: 'https://open.spotify.com/track/0JJP0IS4w0fJx01EcrfkDe',
+                    });
+                    console.error(err);
                 }
-
-                const data = await response.json();
-                setSpotifyData(data);
-            } catch (err) {
-                setSpotifyData({
-                    albumCoverUrl: '/placeholder-album-cover.jpg',
-                    songName: 'Dear Maria, Count Me In',
-                    artist: 'All Time Low',
-                    spotifyUrl: 'https://open.spotify.com/track/0JJP0IS4w0fJx01EcrfkDe',
-                });
-                console.error(err);
-            } finally {
-                setIsLoading(false);
             }
+
+            setIsLoading(false);
         };
 
         fetchRecentTrack();
@@ -53,6 +67,7 @@ const SpotifyPanel: React.FC = () => {
                                 src={spotifyData.albumCoverUrl}
                                 alt="Album cover"
                                 fill
+                                sizes="3rem"
                             />
                         </div>
                         <div className={styles.text}>

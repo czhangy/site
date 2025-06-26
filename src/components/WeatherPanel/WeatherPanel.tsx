@@ -1,7 +1,7 @@
 'use client';
 
-import { fetchSingleRow } from '@/utils/helpers';
-import { CachedWeatherData, LocationData, WeatherData } from '@/utils/interfaces';
+import { cacheToLocalStorage, fetchSingleRow, maybeFetchFromLocalStorage } from '@/utils/helpers';
+import { LocationData, WeatherData } from '@/utils/interfaces';
 import { WeatherCondition } from '@/utils/types';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
@@ -17,30 +17,6 @@ const WeatherPanel: React.FC = () => {
     const [isError, setIsError] = useState<boolean>(false);
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     useEffect(() => {
-        const maybeFetchWeatherDataFromLocalStorage = (): WeatherData | null => {
-            const cacheString: string | null = localStorage.getItem(CACHE_KEY);
-
-            if (cacheString) {
-                const cacheData: CachedWeatherData = JSON.parse(cacheString);
-
-                // Check if cached data is expired
-                if (new Date() <= new Date(cacheData.expiry)) {
-                    return {
-                        cityName: cacheData.cityName,
-                        weather: cacheData.weather,
-                        temperature: cacheData.temperature,
-                        isDay: cacheData.isDay,
-                    };
-                } else {
-                    // Clear cache if expired
-                    localStorage.removeItem(CACHE_KEY);
-                }
-            }
-
-            // If key not in local storage, or key is expired. return null (not found)
-            return null;
-        };
-
         const mapWeatherCondition = (code: number): WeatherCondition => {
             // https://open-meteo.com/en/docs?current=weather_code,temperature_2m#weather_variable_documentation
             if (code >= 95) {
@@ -71,26 +47,14 @@ const WeatherPanel: React.FC = () => {
             }
         };
 
-        const cacheWeatherData = (data: WeatherData) => {
-            const now = new Date();
-            const expiry = new Date(now.getTime() + 60 * 60 * 1000);
-
-            const cacheData: CachedWeatherData = {
-                ...data,
-                expiry: expiry,
-            };
-
-            localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
-        };
-
         const fetchWeatherData = async () => {
             setIsLoading(true);
 
-            const weatherData = maybeFetchWeatherDataFromLocalStorage();
+            const cachedWeatherData = maybeFetchFromLocalStorage(CACHE_KEY);
 
-            if (weatherData) {
+            if (cachedWeatherData) {
                 // Check local storage for any cached location data
-                setWeatherData(weatherData);
+                setWeatherData(cachedWeatherData);
             } else {
                 // If the weather data isn't in local storage, generate it from API
                 const locationData = await fetchLocationData();
@@ -107,7 +71,7 @@ const WeatherPanel: React.FC = () => {
                         const sunrise = new Date(data.daily.sunrise[0]);
                         const sunset = new Date(data.daily.sunset[0]);
 
-                        const weatherData: WeatherData = {
+                        const fetchedWeatherData: WeatherData = {
                             cityName: locationData.cityName,
                             weather: mapWeatherCondition(data.current.weather_code),
                             temperature: `${Math.round(data.current.temperature_2m)}${data.current_units.temperature_2m}`,
@@ -115,9 +79,9 @@ const WeatherPanel: React.FC = () => {
                         };
 
                         // Save weather data + expiry to local storage
-                        cacheWeatherData(weatherData);
+                        cacheToLocalStorage(fetchedWeatherData, CACHE_KEY, 60);
 
-                        setWeatherData(weatherData);
+                        setWeatherData(fetchedWeatherData);
                     } catch (error) {
                         console.error('Error fetching weather data:', error);
                         setIsError(true);
