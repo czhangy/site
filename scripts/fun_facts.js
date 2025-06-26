@@ -55,4 +55,9 @@ if (!funFact) {
     process.exit(1);
 }
 
+if (emoji === '') {
+    console.error('❌ Please provide an emoji in the script source');
+    process.exit(1);
+}
+
 saveFunFact(funFact, emoji);
