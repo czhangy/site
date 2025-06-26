@@ -26,6 +26,7 @@ async function saveFunFact(fact, emoji) {
 
         console.log('✅ Fun fact saved successfully!');
         console.log('Inserted data:', data);
+        console.log('Please reset the emoji!');
 
         return {
             success: true,
