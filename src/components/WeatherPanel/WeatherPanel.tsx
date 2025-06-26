@@ -79,7 +79,7 @@ const WeatherPanel: React.FC = () => {
                         };
 
                         // Save weather data + expiry to local storage
-                        cacheToLocalStorage(fetchedWeatherData, CACHE_KEY, 60);
+                        cacheToLocalStorage(fetchedWeatherData, CACHE_KEY, 10);
 
                         setWeatherData(fetchedWeatherData);
                     } catch (error) {
