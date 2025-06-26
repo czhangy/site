@@ -47,13 +47,20 @@
 
 ## Dev Environment
 
-The following values must be populated in `.env.local`:
+The following values must be populated in `.env.local` to run the web app:
 
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_KEY`
 - `SUPABASE_SECRET_KEY`
 - `TWITTER_BEARER_TOKEN`
 - `GOOGLE_KEY`
+- `SPOTIFY_CLIENT_ID`
+- `SPOTIFY_CLIENT_SECRET`
+- `SPOTIFY_REFRESH_TOKEN`
+
+The following values may need to be populated in `.env.local` for development:
+
+- `SPOTIFY_AUTH_CODE`
 
 ### Geocoding
 

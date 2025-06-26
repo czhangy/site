@@ -1,6 +1,7 @@
 import FunFactPanel from '@/components/FunFactPanel/FunFactPanel';
 import GlowPanel from '@/components/GlowPanel/GlowPanel';
 import NavPanel from '@/components/NavPanel/NavPanel';
+import SpotifyPanel from '@/components/SpotifyPanel/SpotifyPanel';
 import TweetPanel from '@/components/TweetPanel/TweetPanel';
 import WeatherPanel from '@/components/WeatherPanel/WeatherPanel';
 import { LINK_ITEMS } from '@/utils/constants';
@@ -26,17 +27,19 @@ const Dashboard: React.FC = () => {
                 </GlowPanel>
             </div>
             <div className={`${styles.gridPanel} ${styles.latestTweet}`}>
-                <GlowPanel>
+                <GlowPanel pad={true}>
                     <TweetPanel />
                 </GlowPanel>
             </div>
             <div className={`${styles.gridPanel} ${styles.funFact}`}>
-                <GlowPanel>
+                <GlowPanel title="Did You Know?" pad={true}>
                     <FunFactPanel />
                 </GlowPanel>
             </div>
             <div className={`${styles.gridPanel} ${styles.tbd}`}>
-                <GlowPanel>tbd</GlowPanel>
+                <GlowPanel title="Now Listening" pad={true}>
+                    <SpotifyPanel />
+                </GlowPanel>
             </div>
         </div>
     );

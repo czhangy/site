@@ -31,3 +31,10 @@
     letter-spacing: 0.1rem;
     text-transform: uppercase;
 }
+
+@mixin ellipsis-text {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -4,6 +4,8 @@ import React, { useRef, useState } from 'react';
 import styles from './GlowPanel.module.scss';
 
 interface GlowPanelInterface {
+    title?: string;
+    pad?: boolean;
     children: React.ReactNode;
 }
 
@@ -35,6 +37,7 @@ const GlowPanel: React.FC<GlowPanelInterface> = props => {
         <div className={styles.glowPanel}>
             <div
                 ref={containerRef}
+                style={props.pad ? { padding: '1.5rem' } : {}}
                 className={styles.glowPanelContainer}
                 onMouseMove={handleMouseMove}
                 onMouseEnter={handleMouseEnter}
@@ -49,6 +52,7 @@ const GlowPanel: React.FC<GlowPanelInterface> = props => {
                         } as React.CSSProperties
                     }
                 />
+                {props.title ? <p className={styles.title}>{props.title}</p> : ''}
                 {props.children}
             </div>
         </div>

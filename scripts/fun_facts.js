@@ -12,12 +12,12 @@ if (!supabaseUrl || !supabaseKey) {
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function saveFunFact(fact) {
+async function saveFunFact(fact, emoji) {
     try {
         // Insert the fact into the database
         const { data, error } = await supabase
             .from('fun_facts')
-            .insert([{ fact: fact.trim() }])
+            .insert([{ fact: fact.trim(), emoji: emoji.trim() }])
             .select(); // Return the inserted row
 
         if (error) {
@@ -26,6 +26,7 @@ async function saveFunFact(fact) {
 
         console.log('✅ Fun fact saved successfully!');
         console.log('Inserted data:', data);
+        console.log('Please reset the emoji!');
 
         return {
             success: true,
@@ -43,13 +44,21 @@ async function saveFunFact(fact) {
     }
 }
 
-// Get fun fact from command line args
+// Get command line args
 const funFact = process.argv[2];
+
+// Get custom arg
+const emoji = '';
 
 if (!funFact) {
     console.error('❌ Please provide a fun fact as an argument');
-    console.error('Usage: npm run facts "Fun fact goes here"');
+    console.error('Usage: npm run facts <FUN_FACT>');
     process.exit(1);
 }
 
-saveFunFact(funFact);
+if (emoji === '') {
+    console.error('❌ Please provide an emoji in the script source');
+    process.exit(1);
+}
+
+saveFunFact(funFact, emoji);

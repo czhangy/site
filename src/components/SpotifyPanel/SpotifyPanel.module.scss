@@ -1,0 +1,66 @@
+.spotifyPanel {
+    --album-size: 3rem;
+    --link-size: 2rem;
+    --top-spacing: 2.5rem;
+    --max-lines: 2;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+
+    .info {
+        align-items: center;
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+        width: 100%;
+
+        .songInfo {
+            @include flex-center;
+
+            gap: 0.5rem;
+
+            .album {
+                border-radius: 4px;
+                flex-shrink: 0;
+                height: var(--album-size);
+                overflow: hidden;
+                position: relative;
+                width: var(--album-size);
+            }
+
+            .text {
+                font-family: Inter, Arial, Helvetica, sans-serif;
+
+                .song {
+                    @include ellipsis-text;
+
+                    color: white;
+                    font-weight: bold;
+                    -webkit-line-clamp: var(--max-lines);
+                    line-clamp: var(--max-lines);
+                    margin-bottom: 0.25rem;
+                }
+
+                .artist {
+                    color: grey;
+                }
+            }
+        }
+
+        .link {
+            height: var(--link-size);
+            transition: transform 0.2s ease;
+            width: var(--link-size);
+        }
+    }
+}
+
+// Hover effects
+@media (hover: hover) and (pointer: fine) {
+    .spotifyPanel > .info > .link:hover {
+        transform: scale(1.1);
+    }
+}

@@ -1,16 +1,15 @@
 'use client';
 
+import LoadingText from '@/components/LoadingText/LoadingText';
 import { fetchSingleRow } from '@/utils/helpers';
 import { TwitterData } from '@/utils/interfaces';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import LoadingText from '../LoadingText/LoadingText';
 import styles from './TweetPanel.module.scss';
 
 const TweetPanel: React.FC = () => {
     // Hooks
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [isError, setIsError] = useState<boolean>(false);
     const [twitterData, setTwitterData] = useState<TwitterData | null>(null);
     useEffect(() => {
         const fetchTwitterData = async () => {
@@ -28,7 +27,12 @@ const TweetPanel: React.FC = () => {
                 };
                 setTwitterData(fetchedTwitterData);
             } else {
-                setIsError(true);
+                setTwitterData({
+                    profilePicUrl: '/placeholder-twitter-profile-pic.webp',
+                    displayName: 'Charles Zhang',
+                    tweet: 'something went wrong while fetching my latest tweet. fuck you twitter.',
+                    timestamp: '12:00 AM · 1/1/70',
+                });
             }
 
             setIsLoading(false);
@@ -86,18 +90,7 @@ const TweetPanel: React.FC = () => {
     };
 
     const renderProfilePic = () => {
-        if (isError) {
-            return (
-                <div className={styles.pic}>
-                    <Image
-                        className="next-image"
-                        src="/placeholder.webp"
-                        alt="Twitter profile picture"
-                        fill
-                    />
-                </div>
-            );
-        } else if (isLoading || !twitterData) {
+        if (isLoading || !twitterData) {
             return (
                 <div className={styles.pic}>
                     <div className={styles.loadingPic} />
@@ -119,9 +112,7 @@ const TweetPanel: React.FC = () => {
     };
 
     const renderDisplayName = () => {
-        if (isError) {
-            return <span className={styles.displayName}>Charles Zhang</span>;
-        } else if (isLoading || !twitterData) {
+        if (isLoading || !twitterData) {
             return <LoadingText width="100px" />;
         } else {
             return <span className={styles.displayName}>{twitterData.displayName}</span>;
@@ -129,9 +120,7 @@ const TweetPanel: React.FC = () => {
     };
 
     const renderUsername = () => {
-        if (isError) {
-            return <span className={styles.username}>@czhangy_</span>;
-        } else if (isLoading || !twitterData) {
+        if (isLoading || !twitterData) {
             return <LoadingText width="90px" />;
         } else {
             return <span className={styles.username}>@czhangy_</span>;
@@ -139,13 +128,7 @@ const TweetPanel: React.FC = () => {
     };
 
     const renderTweet = () => {
-        if (isError) {
-            return (
-                <p className={styles.tweet}>
-                    something went wrong while fetching my latest tweet. fuck you twitter.
-                </p>
-            );
-        } else if (isLoading || !twitterData) {
+        if (isLoading || !twitterData) {
             return (
                 <div className={`${styles.tweet} ${styles.loadingTweet}`}>
                     <LoadingText width="100%" />
@@ -159,9 +142,7 @@ const TweetPanel: React.FC = () => {
     };
 
     const renderTimestamp = () => {
-        if (isError) {
-            return <p className={styles.timestamp}>12:00 AM · 1/1/70</p>;
-        } else if (isLoading || !twitterData) {
+        if (isLoading || !twitterData) {
             return <LoadingText width="125px" />;
         } else {
             return <p className={styles.timestamp}>{twitterData.timestamp}</p>;
@@ -169,7 +150,6 @@ const TweetPanel: React.FC = () => {
     };
 
     // JSX
-    // TODO: introduce a loading state
     return (
         <div className={styles.tweetPanel}>
             <div className={styles.profile}>

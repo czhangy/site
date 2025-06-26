@@ -10,7 +10,8 @@
         "prepare": "husky",
         "new": "bash scripts/create_component.sh",
         "geocode": "node scripts/geocode.js",
-        "facts": "node scripts/fun_facts.js"
+        "facts": "node scripts/fun_facts.js",
+        "spotify": "node scripts/spotify.js"
     },
     "dependencies": {
         "@supabase/supabase-js": "^2.50.0",
