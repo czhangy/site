@@ -4,6 +4,7 @@ import styles from './TimelineItem.module.scss';
 
 interface TimelineItemProps {
     experience: WorkExperience;
+    idx: number;
     visible: boolean;
 }
 
@@ -41,7 +42,7 @@ const TimelineItem: React.FC<TimelineItemProps> = props => {
 
     // JSX
     return (
-        <div data-id={props.experience.id} className={styles.timelineItem}>
+        <div data-id={props.idx} className={styles.timelineItem}>
             <div className={styles.timelineMarker}>
                 <div className={styles.markerDot} />
             </div>
@@ -69,8 +70,8 @@ const TimelineItem: React.FC<TimelineItemProps> = props => {
                 </div>
                 <div className={styles.achievements}>
                     <ul className={styles.achievementsList}>
-                        {props.experience.achievements.map((achievement, achIndex) => (
-                            <li key={achIndex} className={styles.achievement}>
+                        {props.experience.achievements.map((achievement, idx) => (
+                            <li key={idx} className={styles.achievement}>
                                 {achievement}
                             </li>
                         ))}
