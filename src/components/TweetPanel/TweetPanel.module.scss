@@ -18,9 +18,9 @@
         gap: 0.75rem;
 
         .pic {
-            border-radius: 50%;
+            @include circle;
+            
             height: var(--pic-size);
-            overflow: hidden;
             position: relative;
             width: var(--pic-size);
 
