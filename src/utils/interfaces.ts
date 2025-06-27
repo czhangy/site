@@ -56,5 +56,5 @@ export interface WorkExperience {
     startDate: string;
     endDate: string;
     achievements: string[];
-    logo?: string;
+    logo: string;
 }

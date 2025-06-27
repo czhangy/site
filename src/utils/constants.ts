@@ -14,10 +14,11 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
         startDate: '2023-12',
         endDate: 'Present',
         achievements: [],
+        logo: '/stripe.svg',
     },
     {
         company: 'Capital One',
-        position: 'Software Engineering Intern',
+        position: 'Software Engineer Intern',
         startDate: '2022-06',
         endDate: '2022-08',
         achievements: [
@@ -25,6 +26,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
             'Used WASM and LitElement to develop, optimize, and test a document viewer micro-frontend that outperforms previous builds and the PDF.js library by ~30%, while incorporating new functionality such as grab and drag and image rendering.',
             'Researched WASM, shared web workers, and internal APIs to drive innovation on newer products.',
         ],
+        logo: '/capital-one.png',
     },
     {
         company: 'Bruinshack',
@@ -36,6 +38,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
             "Spearheaded the design and development of a user dashboard and dorm review feature in an effort to improve students' experience on the site, contributing to an increase of ~40% user acquisition.",
             'Led a refactoring effort from Vue.js to Next.js to improve SEO and codebase clarity for future hires, and implemented/enforced new code standards using Prettier, reducing codebase size by over 30%.',
         ],
+        logo: '/bruinshack.jpg',
     },
     {
         company: 'Bruinshack',
@@ -46,6 +49,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
             'Designed and developed a responsive review system using Vue.js and the Vuex library that facilitates ratings and reviews from approximately 2,000 weekly active users looking for apartments in the Westwood area.',
             'Worked with design team to establish communication channels to improve inter-team efficiency and reduce unnecessary development.',
         ],
+        logo: '/bruinshack.jpg',
     },
     {
         company: 'The Amplification Project',
@@ -55,5 +59,6 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
         achievements: [
             "Worked to implement a responsive design of the organization's main website using Vue.js while coordinating with a backend developer to raise awareness of forced migration through the preservation of related art and activism.",
         ],
+        logo: '/the-amplification-project.webp',
     },
 ];

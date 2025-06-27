@@ -1,4 +1,6 @@
 .timelineItem {
+    --logo-size: 50px;
+
     margin-bottom: 3rem;
     position: relative;
     width: 100%;
@@ -69,19 +71,36 @@
                 }
             }
 
-            .position {
-                color: $dark-bg-color;
-                font-size: 1.25rem;
-                font-weight: bold;
-                line-height: 1.3;
-                margin-bottom: 0.25rem;
-            }
+            .companyInfo {
+                align-items: center;
+                display: flex;
+                gap: 1rem;
+                margin: 1.5rem 0;
 
-            .company {
-                color: $primary-color;
-                font-size: 1rem;
-                font-weight: 600;
-                margin-bottom: 0;
+                .logo {
+                    border-radius: 50%;
+                    height: var(--logo-size);
+                    overflow: hidden;
+                    position: relative;
+                    width: var(--logo-size);
+                }
+
+                .companyText {
+                    .company {
+                        color: $dark-bg-color;
+                        font-size: 1.25rem;
+                        font-weight: bold;
+                        line-height: 1.3;
+                        margin-bottom: 0.25rem;
+                    }
+
+                    .position {
+                        color: $primary-color;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        margin-top: 0.5rem;
+                    }
+                }
             }
         }
 
@@ -126,11 +145,11 @@
                     gap: 0.5rem;
                 }
 
-                .position {
+                .company {
                     font-size: 1.5rem;
                 }
 
-                .company {
+                .position {
                     font-size: 1.125rem;
                 }
             }

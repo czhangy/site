@@ -1,4 +1,5 @@
 import { WorkExperience } from '@/utils/interfaces';
+import Image from 'next/image';
 import React from 'react';
 import styles from './TimelineItem.module.scss';
 
@@ -66,8 +67,20 @@ const TimelineItem: React.FC<TimelineItemProps> = props => {
                             )
                         </span>
                     </div>
-                    <h3 className={styles.position}>{props.experience.position}</h3>
-                    <h4 className={styles.company}>{props.experience.company}</h4>
+                    <div className={styles.companyInfo}>
+                        <div className={styles.logo}>
+                            <Image
+                                className="next-image"
+                                src={props.experience.logo}
+                                alt={`${props.experience.company} logo`}
+                                fill
+                            />
+                        </div>
+                        <div className={styles.companyText}>
+                            <h3 className={styles.company}>{props.experience.company}</h3>
+                            <h4 className={styles.position}>{props.experience.position}</h4>
+                        </div>
+                    </div>
                 </div>
                 <div className={styles.achievements}>
                     <ul className={styles.achievementsList}>
