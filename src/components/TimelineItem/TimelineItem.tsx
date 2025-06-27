@@ -12,8 +12,9 @@ const TimelineItem: React.FC<TimelineItemProps> = props => {
     // Helpers
     const formatDate = (dateString: string): string => {
         if (dateString === 'Present') return 'Present';
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', {
+        const wrongDate = new Date(dateString);
+        const actualDate = new Date(wrongDate.getFullYear(), wrongDate.getMonth() + 1);
+        return actualDate.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'short',
         });
