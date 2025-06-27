@@ -27,7 +27,7 @@
     color: $primary-color;
     font-family: $font;
     font-size: 1.25rem;
-    font-weight: 700;
+    font-weight: bold;
     letter-spacing: 0.1rem;
     text-transform: uppercase;
 }
@@ -37,4 +37,9 @@
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+@mixin circle {
+    border-radius: 50%;
+    overflow: hidden;
 }

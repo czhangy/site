@@ -48,3 +48,13 @@ export interface SpotifyData {
     albumCoverUrl: string;
     spotifyUrl: string;
 }
+
+// Defines the data needed to populate the Timeline
+export interface WorkExperience {
+    company: string;
+    position: string;
+    startDate: string;
+    endDate: string;
+    achievements: string[];
+    logo: string;
+}

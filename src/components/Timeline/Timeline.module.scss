@@ -1,0 +1,79 @@
+.timeline {
+    --end-width: 10px;
+    --dot-width: 16px;
+    --line-width: 2px;
+
+    padding: 1rem 0.5rem;
+    width: 100%;
+
+    .title {
+        background: linear-gradient(45deg, white, #e0e7ff);
+        background-clip: text;
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 4rem;
+        text-align: center;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 2px 4px rgb(black, 0.1);
+    }
+
+    .timelineBody {
+        padding-left: 4rem;
+        position: relative;
+        width: 100%;
+
+        .line {
+            background: linear-gradient(
+                to bottom,
+                rgb(white, 0.8) 0%,
+                rgb(white, 0.4) 50%,
+                rgb(white, 0.2) 100%
+            );
+            bottom: 0;
+            left: 1rem;
+            position: absolute;
+            top: 0;
+            width: var(--line-width);
+
+            &::before,
+            &::after {
+                background: white;
+                border-radius: 50%;
+                box-shadow: 0 0 10px rgb(white, 0.5);
+                content: '';
+                height: var(--end-width);
+                left: calc(-0.5 * var(--end-width) + 0.5 * var(--line-width));
+                position: absolute;
+                width: var(--end-width);
+            }
+
+            &::before {
+                top: 0;
+            }
+
+            &::after {
+                bottom: 0;
+            }
+        }
+    }
+}
+
+// Tablet layout
+@media (min-width: $tablet) {
+    .timeline {
+        padding: 0;
+
+        .title {
+            font-size: 3rem;
+        }
+
+        .timelineBody {
+            padding-left: 2rem;
+
+            .line {
+                left: calc(-0.5 * var(--dot-width) - 0.5 * var(--line-width));
+            }
+        }
+    }
+}
