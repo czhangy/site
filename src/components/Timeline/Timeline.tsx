@@ -10,23 +10,26 @@ const Timeline: React.FC = () => {
     // Hooks
     const [visibleItems, setVisibleItems] = useState<Set<string>>(new Set());
     useEffect(() => {
-        // Set observer for in-view animations
-        const observer = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.getAttribute('data-id');
-                        if (id) {
-                            setVisibleItems(prev => new Set([...prev, id]));
+        let observer: IntersectionObserver;
+        if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+            // Set observer for in-view animations
+            observer = new IntersectionObserver(
+                entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.getAttribute('data-id');
+                            if (id) {
+                                setVisibleItems(prev => new Set([...prev, id]));
+                            }
                         }
-                    }
-                });
-            },
-            { threshold: 0.3 }
-        );
+                    });
+                },
+                { threshold: 0.3 }
+            );
 
-        const timelineItems = document.querySelectorAll('[data-id]');
-        timelineItems.forEach(item => observer.observe(item));
+            const timelineItems = document.querySelectorAll('[data-id]');
+            timelineItems.forEach(item => observer.observe(item));
+        }
 
         // Clean ups
         return () => observer.disconnect();

@@ -74,6 +74,7 @@ const TimelineItem: React.FC<TimelineItemProps> = props => {
                                 src={props.experience.logo}
                                 alt={`${props.experience.company} logo`}
                                 fill
+                                sizes="50px"
                             />
                         </div>
                         <div className={styles.companyText}>
