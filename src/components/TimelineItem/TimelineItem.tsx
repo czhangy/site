@@ -1,6 +1,8 @@
+'use client';
+
 import { WorkExperience } from '@/utils/interfaces';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './TimelineItem.module.scss';
 
 interface TimelineItemProps {
@@ -10,6 +12,13 @@ interface TimelineItemProps {
 }
 
 const TimelineItem: React.FC<TimelineItemProps> = props => {
+    // Hooks
+    const [present, setPresent] = useState<Date | null>(null);
+    useEffect(() => {
+        // Prevent hydration error: new Date() is a browser API
+        setPresent(new Date());
+    }, []);
+
     // Helpers
     const formatDate = (dateString: string): string => {
         if (dateString === 'Present') return 'Present';
@@ -22,8 +31,12 @@ const TimelineItem: React.FC<TimelineItemProps> = props => {
     };
 
     const calculateDuration = (start: string, end: string): string => {
+        if (!present) {
+            return '';
+        }
+
         const startDate = new Date(start);
-        const endDate = end === 'Present' ? new Date() : new Date(end);
+        const endDate = end === 'Present' ? present : new Date(end);
         const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
         const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
 
